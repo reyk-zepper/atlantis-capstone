@@ -1,59 +1,19 @@
-// import { useState } from "react";
-
-// export default function Form() {
-//   const [items, setItems] = useState([{ product: "", price: "" }]);
-
-//   const handleAddItem = () => {
-//     setItems([...items, { product: "", price: "" }]);
-//   };
-
-//   const handleItemChange = (index, field, value) => {
-//     const newItems = [...items];
-//     newItems[index][field] = value;
-//     setItems(newItems);
-//   };
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     console.log(items);
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       {items.map((item, index) => (
-//         <div key={index} className="entry-form">
-//           <input
-//             type="text"
-//             placeholder="Product"
-//             value={item.product}
-//             onChange={(event) =>
-//               handleItemChange(index, "product", event.target.value)
-//             }
-//           />
-
-//           <input
-//             type="number"
-//             placeholder="Price"
-//             value={item.price}
-//             onChange={(event) =>
-//               handleItemChange(index, "price", event.target.value)
-//             }
-//           />
-//         </div>
-//       ))}
-//       <button type="button" onClick={handleAddItem}>
-//         Zeile hinzufügen
-//       </button>
-//       <button type="submit">Formular absenden</button>
-//     </form>
-//   );
-// }
-
 import { useState } from "react";
 import ProductCard from "../ProductCard";
 
 export default function Form() {
-  const [items, setItems] = useState([{ product: "", price: "" }]);
+  const [items, setItems] = useState([
+    {
+      motherboard: { name: "Motherboard", price: 0 },
+      cpu: { name: "CPU", price: 0 },
+      gpu: { name: "GPU", price: 0 },
+      ram: { name: "RAM", price: 0 },
+      storage: { name: "Storage", price: 0 },
+      pcu: { name: "PCU", price: 0 },
+      cooling: { name: "Cooling", price: 0 },
+      case: { name: "Case", price: 0 },
+    },
+  ]);
   const [products, setProducts] = useState([]);
 
   const handleAddItem = () => {
@@ -74,27 +34,24 @@ export default function Form() {
 
   return (
     <form onSubmit={handleSubmit}>
-      {items.map((item, index) => (
-        <div key={index} className="entry-form">
-          <input
-            type="text"
-            placeholder="Product"
-            value={item.product}
-            onChange={(event) =>
-              handleItemChange(index, "product", event.target.value)
-            }
-          />
+      <div className="entry-form">
+        <input
+          type="text"
+          value={items.motherboard.name}
+          onChange={(event) =>
+            handleItemChange(index, "product", event.target.value)
+          }
+        />
 
-          <input
-            type="number"
-            placeholder="Price"
-            value={item.price}
-            onChange={(event) =>
-              handleItemChange(index, "price", event.target.value)
-            }
-          />
-        </div>
-      ))}
+        <input
+          type="number"
+          value={0}
+          onChange={(event) =>
+            handleItemChange(index, "price", event.target.value)
+          }
+        />
+      </div>
+
       <button type="button" onClick={handleAddItem}>
         Zeile hinzufügen
       </button>
