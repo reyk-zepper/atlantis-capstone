@@ -1,8 +1,9 @@
-export default function ProductCard({ product, price }) {
+import ProductCard from "../ProductCard";
+
+export default function ProjectCard() {
   return (
-    <div className="product-card">
-      <h3>{product}</h3>
-      <p>{price}</p>
+    <div>
+      <ProductCard></ProductCard>
     </div>
   );
 }

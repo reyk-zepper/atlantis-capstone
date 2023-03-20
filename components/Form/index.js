@@ -50,7 +50,7 @@
 // }
 
 import { useState } from "react";
-import ProductCard from "../ProjectCard";
+import ProductCard from "../ProductCard";
 
 export default function Form() {
   const [items, setItems] = useState([{ product: "", price: "" }]);
