@@ -3,16 +3,14 @@ import ProductCard from "../ProductCard";
 
 export default function Form() {
   const [items, setItems] = useState([
-    {
-      motherboard: { name: "Motherboard", price: 0 },
-      cpu: { name: "CPU", price: 0 },
-      gpu: { name: "GPU", price: 0 },
-      ram: { name: "RAM", price: 0 },
-      storage: { name: "Storage", price: 0 },
-      pcu: { name: "PCU", price: 0 },
-      cooling: { name: "Cooling", price: 0 },
-      case: { name: "Case", price: 0 },
-    },
+    { name: "Motherboard", price: 0 },
+    { name: "CPU", price: 0 },
+    { name: "GPU", price: 0 },
+    { name: "RAM", price: 0 },
+    { name: "Storage", price: 0 },
+    { name: "PCU", price: 0 },
+    { name: "Cooling", price: 0 },
+    { name: "Case", price: 0 },
   ]);
   const [products, setProducts] = useState([]);
 
@@ -29,28 +27,28 @@ export default function Form() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setProducts(items);
-    setItems([{ product: "", price: "" }]);
+    setItems([...items, { product: "", price: "" }]);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="entry-form">
-        <input
-          type="text"
-          value={items.motherboard.name}
-          onChange={(event) =>
-            handleItemChange(index, "product", event.target.value)
-          }
-        />
+      <input type="text" name="projectname" placeholder="project name" />
+      {items.map((item) => {
+        return (
+          <div key={item.name} className="entry-form">
+            <input name={item.name} type="text" defaultValue={item.name} />
 
-        <input
-          type="number"
-          value={0}
-          onChange={(event) =>
-            handleItemChange(index, "price", event.target.value)
-          }
-        />
-      </div>
+            <input
+              type="number"
+              name={`${item.name}Price`}
+              value={0}
+              onChange={(event) =>
+                handleItemChange(index, "price", event.target.value)
+              }
+            />
+          </div>
+        );
+      })}
 
       <button type="button" onClick={handleAddItem}>
         Zeile hinzufügen
