@@ -13,9 +13,10 @@ export default function Form() {
     { name: "Case", price: 0 },
   ]);
   const [products, setProducts] = useState([]);
+  const [projectName, setProjectName] = useState("");
 
   const handleAddItem = () => {
-    setItems([...items, { product: "", price: "" }]);
+    setItems([...items, { name: "", price: "" }]);
   };
 
   const handleItemChange = (index, field, value) => {
@@ -24,24 +25,61 @@ export default function Form() {
     setItems(newItems);
   };
 
+  const handleProjectNameChange = (event) => {
+    setProjectName(event.target.value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    setProducts(items);
-    setItems([...items, { product: "", price: "" }]);
+
+    // Erstelle ein neues Projekt-Objekt
+    const project = {
+      name: event.target.projectname.value,
+      items: items,
+    };
+    console.log(project);
+    // Füge das neue Projekt zur Liste der Produkte hinzu
+    setProducts([...products, project]);
+
+    // Setze die Formular-Eingaben zurück
+    setItems([
+      { name: "Motherboard", price: 0 },
+      { name: "CPU", price: 0 },
+      { name: "GPU", price: 0 },
+      { name: "RAM", price: 0 },
+      { name: "Storage", price: 0 },
+      { name: "PCU", price: 0 },
+      { name: "Cooling", price: 0 },
+      { name: "Case", price: 0 },
+    ]);
+    event.target.reset();
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="projectname" placeholder="project name" />
-      {items.map((item) => {
+      <input
+        type="text"
+        name="projectname"
+        placeholder="project name"
+        value={projectName}
+        onChange={handleProjectNameChange}
+      />
+      {items.map((item, index) => {
         return (
           <div key={item.name} className="entry-form">
-            <input name={item.name} type="text" defaultValue={item.name} />
+            <input
+              name={item.name}
+              type="text"
+              defaultValue={item.name}
+              onChange={(event) =>
+                handleItemChange(index, "name", event.target.value)
+              }
+            />
 
             <input
               type="number"
               name={`${item.name}Price`}
-              value={0}
+              value={item.price}
               onChange={(event) =>
                 handleItemChange(index, "price", event.target.value)
               }
@@ -56,11 +94,11 @@ export default function Form() {
       <button type="submit">Formular absenden</button>
 
       <div className="product-list">
-        {products.map((product, index) => (
+        {products.map((project, index) => (
           <ProductCard
             key={index}
-            product={product.product}
-            price={product.price}
+            product={project.product}
+            price={project.price}
           />
         ))}
       </div>

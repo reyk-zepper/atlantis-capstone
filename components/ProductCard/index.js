@@ -10,11 +10,28 @@ const ProductCardWrapper = styled.div`
   }
 `;
 
-export default function ProductCard({ product, price }) {
+// export default function ProductCard({ product, price }) {
+//   return (
+//     <ProductCardWrapper>
+//       <h2>{product}</h2>
+//       <p>{price}</p>
+//     </ProductCardWrapper>
+//   );
+// }
+export default function ProductCard({ product, index }) {
+  const totalPrice = items.reduce((acc, item) => acc + parseInt(item.price), 0);
+
   return (
-    <ProductCardWrapper>
-      <h2>{product}</h2>
-      <p>{price}</p>
-    </ProductCardWrapper>
+    <div className="product-card">
+      <h2>{projectname}</h2>
+      <ul>
+        {items.map((item, index) => (
+          <li key={index}>
+            {item.name}: {item.price}
+          </li>
+        ))}
+      </ul>
+      <p>Total price: {totalPrice}</p>
+    </div>
   );
 }
