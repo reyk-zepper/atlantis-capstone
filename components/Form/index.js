@@ -77,7 +77,7 @@ export default function Form() {
 
             <input
               type="number"
-              name={`${item.name}Price`}
+              name={`${item.name}price`}
               value={item.price}
               onChange={(event) =>
                 handleItemChange(index, "price", event.target.value)
@@ -93,39 +93,15 @@ export default function Form() {
       <button type="submit">Formular absenden</button>
 
       <div className="product-list">
-        {projects?.map((project) => (
-          <div key={project.id}>
-            <h2>{project.name}</h2>
-            <ul>
-              <li>
-                <p>
-                  {project.motherboard} {project.motherboardprice}
-                </p>
-                <p>
-                  {project.motherboard} {project.motherboardprice}
-                </p>
-                <p>
-                  {project.motherboard} {project.motherboardprice}
-                </p>
-                <p>
-                  {project.motherboard} {project.motherboardprice}
-                </p>
-                <p>
-                  {project.motherboard} {project.motherboardprice}
-                </p>
-                <p>
-                  {project.motherboard} {project.motherboardprice}
-                </p>
-                <p>
-                  {project.motherboard} {project.motherboardprice}
-                </p>
-                <p>
-                  {project.motherboard} {project.motherboardprice}
-                </p>
+        {projects?.map((project, index) =>
+          project.items.map((item, index) => {
+            return (
+              <li key={index}>
+                <p>{item.name}</p>
               </li>
-            </ul>
-          </div>
-        ))}
+            );
+          })
+        )}
       </div>
     </form>
   );
