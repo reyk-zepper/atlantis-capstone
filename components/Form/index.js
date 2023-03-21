@@ -1,16 +1,15 @@
 import { useState } from "react";
-import ProductCard from "../ProductCard";
 import styled from "styled-components";
 
 const partList = [
-  { name: "motherboard", price: 0, id: 1 },
-  { name: "cpu", price: 0, id: 2 },
-  { name: "gpu", price: 0, id: 3 },
-  { name: "ram", price: 0, id: 4 },
-  { name: "storage", price: 0, id: 5 },
-  { name: "pcu", price: 0, id: 6 },
-  { name: "cooling", price: 0, id: 7 },
-  { name: "case", price: 0, id: 8 },
+  { value: "", name: "motherboard", price: 0, id: 1 },
+  { value: "", name: "cpu", price: 0, id: 2 },
+  { value: "", name: "gpu", price: 0, id: 3 },
+  { value: "", name: "ram", price: 0, id: 4 },
+  { value: "", name: "storage", price: 0, id: 5 },
+  { value: "", name: "pcu", price: 0, id: 6 },
+  { value: "", name: "cooling", price: 0, id: 7 },
+  { value: "", name: "case", price: 0, id: 8 },
 ];
 
 export default function Form() {
@@ -23,6 +22,7 @@ export default function Form() {
   };
 
   const handleItemChange = (index, field, value) => {
+    console.log({ field, value });
     const newItems = [...items];
     newItems[index][field] = value;
     setItems(newItems);
@@ -38,23 +38,21 @@ export default function Form() {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     const newProject = { ...data, id: crypto.randomUUID() };
-    console.log(newProject);
+
     //neues Projekt-Objekt erstellen
     const project = {
       name: event.target.projectname.value,
       items: items,
     };
-    console.log("project", project);
-    console.log("project.items", project);
 
     const resetItems = partList.map((item) => {
-      return { ...item, price: 0 };
+      return { ...item, price: 0, value: "" };
     });
 
     //das neue Projekt zur Liste der Produkte hinzufügen
     setProjects([...projects, project]);
 
-    // Setze die Formular-Eingaben zurück
+    // Formular-Eingaben zurücksetzen
     setItems(resetItems);
     console.log("PARTLIST", partList);
     setProjectName("");
@@ -76,9 +74,11 @@ export default function Form() {
             <input
               name={item.name}
               type="text"
-              defaultValue={item.name.toUpperCase()}
+              // defaultValue={item.name.toUpperCase()}
+              placeholder={item.name}
+              value={item.value}
               onChange={(event) =>
-                handleItemChange(index, "name", event.target.value)
+                handleItemChange(index, "value", event.target.value)
               }
             />
 
@@ -111,7 +111,10 @@ export default function Form() {
                   return (
                     <li key={index}>
                       <p>
-                        {item.name.toUpperCase()}: {item.price}$
+                        {item.value === ""
+                          ? item.name.toUpperCase()
+                          : item.value.toUpperCase()}
+                        : {item.price}$
                       </p>
                     </li>
                   );
