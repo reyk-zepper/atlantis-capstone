@@ -47,11 +47,16 @@ export default function Form() {
     console.log("project", project);
     console.log("project.items", project);
 
+    const resetItems = partList.map((item) => {
+      return { ...item, price: 0 };
+    });
+
     //das neue Projekt zur Liste der Produkte hinzufügen
     setProjects([...projects, project]);
 
     // Setze die Formular-Eingaben zurück
-    setItems(partList);
+    setItems(resetItems);
+    console.log("PARTLIST", partList);
     setProjectName("");
     event.target.reset();
   };
@@ -96,18 +101,23 @@ export default function Form() {
 
       <div className="product-list">
         {projects.map((project, index) => {
+          let totalPrice = 0;
           return (
             <div key={index}>
               <h2>{project.name}</h2>
-              {project.items.map((item, index) => {
-                return (
-                  <li key={index}>
-                    <p>
-                      {item.name.toUpperCase()}: {item.price}
-                    </p>
-                  </li>
-                );
-              })}
+              <ul>
+                {project.items.map((item, index) => {
+                  totalPrice += Number(item.price);
+                  return (
+                    <li key={index}>
+                      <p>
+                        {item.name.toUpperCase()}: {item.price}$
+                      </p>
+                    </li>
+                  );
+                })}
+              </ul>
+              <p>Total: {totalPrice}$</p>
             </div>
           );
         })}
