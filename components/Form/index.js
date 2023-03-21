@@ -1,22 +1,24 @@
 import { useState } from "react";
 import ProductCard from "../ProductCard";
 
+const partList = [
+  { name: "motherboard", price: 0, id: 1 },
+  { name: "cpu", price: 0, id: 2 },
+  { name: "gpu", price: 0, id: 3 },
+  { name: "ram", price: 0, id: 4 },
+  { name: "storage", price: 0, id: 5 },
+  { name: "pcu", price: 0, id: 6 },
+  { name: "cooling", price: 0, id: 7 },
+  { name: "case", price: 0, id: 8 },
+];
+
 export default function Form() {
-  const [items, setItems] = useState([
-    { name: "Motherboard", price: 0 },
-    { name: "CPU", price: 0 },
-    { name: "GPU", price: 0 },
-    { name: "RAM", price: 0 },
-    { name: "Storage", price: 0 },
-    { name: "PCU", price: 0 },
-    { name: "Cooling", price: 0 },
-    { name: "Case", price: 0 },
-  ]);
-  const [products, setProducts] = useState([]);
+  const [items, setItems] = useState(partList);
+  const [projects, setProjects] = useState([]);
   const [projectName, setProjectName] = useState("");
 
   const handleAddItem = () => {
-    setItems([...items, { name: "", price: "" }]);
+    setItems([...items, { name: "", price: "", id: crypto.randomUUID() }]);
   };
 
   const handleItemChange = (index, field, value) => {
@@ -32,26 +34,23 @@ export default function Form() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    const newProject = { ...data, id: crypto.randomUUID() };
+    console.log(newProject);
     // Erstelle ein neues Projekt-Objekt
     const project = {
       name: event.target.projectname.value,
       items: items,
     };
-    console.log(project);
+    console.log("project", project);
+    console.log("project.items", project);
+
     // Füge das neue Projekt zur Liste der Produkte hinzu
-    setProducts([...products, project]);
+    setProjects([...projects, project]);
 
     // Setze die Formular-Eingaben zurück
-    setItems([
-      { name: "Motherboard", price: 0 },
-      { name: "CPU", price: 0 },
-      { name: "GPU", price: 0 },
-      { name: "RAM", price: 0 },
-      { name: "Storage", price: 0 },
-      { name: "PCU", price: 0 },
-      { name: "Cooling", price: 0 },
-      { name: "Case", price: 0 },
-    ]);
+    setItems(partList);
     event.target.reset();
   };
 
@@ -66,11 +65,11 @@ export default function Form() {
       />
       {items.map((item, index) => {
         return (
-          <div key={item.name} className="entry-form">
+          <div key={item.id} className="entry-form">
             <input
               name={item.name}
               type="text"
-              defaultValue={item.name}
+              defaultValue={item.name.toUpperCase()}
               onChange={(event) =>
                 handleItemChange(index, "name", event.target.value)
               }
@@ -94,12 +93,38 @@ export default function Form() {
       <button type="submit">Formular absenden</button>
 
       <div className="product-list">
-        {products.map((project, index) => (
-          <ProductCard
-            key={index}
-            product={project.product}
-            price={project.price}
-          />
+        {projects?.map((project) => (
+          <div key={project.id}>
+            <h2>{project.name}</h2>
+            <ul>
+              <li>
+                <p>
+                  {project.motherboard} {project.motherboardprice}
+                </p>
+                <p>
+                  {project.motherboard} {project.motherboardprice}
+                </p>
+                <p>
+                  {project.motherboard} {project.motherboardprice}
+                </p>
+                <p>
+                  {project.motherboard} {project.motherboardprice}
+                </p>
+                <p>
+                  {project.motherboard} {project.motherboardprice}
+                </p>
+                <p>
+                  {project.motherboard} {project.motherboardprice}
+                </p>
+                <p>
+                  {project.motherboard} {project.motherboardprice}
+                </p>
+                <p>
+                  {project.motherboard} {project.motherboardprice}
+                </p>
+              </li>
+            </ul>
+          </div>
         ))}
       </div>
     </form>
