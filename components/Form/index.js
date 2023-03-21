@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ProductCard from "../ProductCard";
+import styled from "styled-components";
 
 const partList = [
   { name: "motherboard", price: 0, id: 1 },
@@ -38,7 +39,7 @@ export default function Form() {
     const data = Object.fromEntries(formData);
     const newProject = { ...data, id: crypto.randomUUID() };
     console.log(newProject);
-    // Erstelle ein neues Projekt-Objekt
+    //neues Projekt-Objekt erstellen
     const project = {
       name: event.target.projectname.value,
       items: items,
@@ -46,11 +47,12 @@ export default function Form() {
     console.log("project", project);
     console.log("project.items", project);
 
-    // Füge das neue Projekt zur Liste der Produkte hinzu
+    //das neue Projekt zur Liste der Produkte hinzufügen
     setProjects([...projects, project]);
 
     // Setze die Formular-Eingaben zurück
     setItems(partList);
+    setProjectName("");
     event.target.reset();
   };
 
@@ -93,16 +95,25 @@ export default function Form() {
       <button type="submit">Formular absenden</button>
 
       <div className="product-list">
-        {projects?.map((project, index) =>
-          project.items.map((item, index) => {
-            return (
-              <li key={index}>
-                <p>{item.name}</p>
-              </li>
-            );
-          })
-        )}
+        {projects.map((project, index) => {
+          return (
+            <div key={index}>
+              <h2>{project.name}</h2>
+              {project.items.map((item, index) => {
+                return (
+                  <li key={index}>
+                    <p>
+                      {item.name.toUpperCase()}: {item.price}
+                    </p>
+                  </li>
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
     </form>
   );
 }
+
+const StyledProjectCard = styled.div``;
