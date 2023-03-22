@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import ProjectCard from "../ProjectCard";
 
 export default function Form() {
@@ -9,12 +8,7 @@ export default function Form() {
 
   useEffect(() => {
     const partList = [
-      {
-        value: "",
-        name: "motherboard",
-        price: 0,
-        id: crypto.randomUUID(),
-      },
+      { value: "", name: "motherboard", price: 0, id: crypto.randomUUID() },
       { value: "", name: "cpu", price: 0, id: crypto.randomUUID() },
       { value: "", name: "gpu", price: 0, id: crypto.randomUUID() },
       { value: "", name: "ram", price: 0, id: crypto.randomUUID() },
@@ -48,7 +42,6 @@ export default function Form() {
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    // const newProject = { ...data, id: crypto.randomUUID() };
 
     //neues Projekt-Objekt erstellen
     const project = {
@@ -85,7 +78,6 @@ export default function Form() {
             <input
               name={item.name}
               type="text"
-              // defaultValue={item.name.toUpperCase()}
               placeholder={item.name}
               value={item.value}
               onChange={(event) =>
