@@ -18,10 +18,7 @@ export default function Form() {
   const [projectName, setProjectName] = useState("");
 
   const handleAddItem = () => {
-    setItems([
-      ...items,
-      { value: "", name: "", price: "", id: crypto.randomUUID() },
-    ]);
+    setItems([...items, { value: "", name: "", price: "", id: uuidv4() }]);
   };
 
   const handleItemChange = (index, field, value) => {
@@ -37,13 +34,11 @@ export default function Form() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-
     //neues Projekt-Objekt erstellen
     const project = {
       name: event.target.projectname.value,
       items: items,
+      id: uuidv4(),
     };
 
     const resetItems = partList.map((item) => {
@@ -60,45 +55,52 @@ export default function Form() {
     event.target.reset();
   };
 
+  function handleDelete(id) {
+    const updatedList = projects.filter((project) => project.id !== id);
+    setProjects(updatedList);
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="projectname"
-        placeholder="project name"
-        value={projectName}
-        onChange={handleProjectNameChange}
-      />
-      {items.map((item, index) => {
-        return (
-          <div key={item.id} className="entry-form">
-            <input
-              name={item.name}
-              type="text"
-              placeholder={item.name}
-              value={item.value}
-              onChange={(event) =>
-                handleItemChange(index, "value", event.target.value)
-              }
-            />
+    <>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="projectname"
+          placeholder="project name"
+          value={projectName}
+          onChange={handleProjectNameChange}
+        />
+        {items.map((item, index) => {
+          return (
+            <div key={item.id}>
+              <input
+                name={item.name}
+                type="text"
+                placeholder={item.name}
+                value={item.value}
+                onChange={(event) =>
+                  handleItemChange(index, "value", event.target.value)
+                }
+              />
 
-            <input
-              type="number"
-              name={`${item.name}price`}
-              value={item.price}
-              onChange={(event) =>
-                handleItemChange(index, "price", event.target.value)
-              }
-            />
-          </div>
-        );
-      })}
+              <input
+                type="number"
+                name={`${item.name}price`}
+                value={item.price}
+                onChange={(event) =>
+                  handleItemChange(index, "price", event.target.value)
+                }
+              />
+            </div>
+          );
+        })}
 
-      <button type="button" onClick={handleAddItem}>
-        Zeile hinzufügen
-      </button>
-      <button type="submit">Formular absenden</button>
-      <ProjectCards projects={projects} />
-    </form>
+        <button type="button" onClick={handleAddItem}>
+          ✚
+        </button>
+        <button type="submit">save</button>
+      </form>
+      <ProjectCards handleDelete={handleDelete} projects={projects} />
+    </>
   );
 }
