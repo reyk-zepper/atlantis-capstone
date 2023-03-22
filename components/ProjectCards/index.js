@@ -11,17 +11,17 @@ const StyledProjectCard = styled.div`
   margin: 10px;
 `;
 
-export default function ProjectCard({ projects }) {
+export default function ProjectCards({ projects }) {
   const hasData = projects && projects.length > 0;
 
   return (
     <>
       {hasData && (
-        <StyledProjectCard hasData={hasData}>
+        <div>
           {projects.map((project, index) => {
             let totalPrice = 0;
             return (
-              <div key={index}>
+              <StyledProjectCard hasData={hasData} key={index}>
                 <h2>Project: {project.name}</h2>
                 <ul>
                   {project.items.map((item) => {
@@ -39,10 +39,10 @@ export default function ProjectCard({ projects }) {
                   })}
                 </ul>
                 <p>Total: {totalPrice}$</p>
-              </div>
+              </StyledProjectCard>
             );
           })}
-        </StyledProjectCard>
+        </div>
       )}
     </>
   );

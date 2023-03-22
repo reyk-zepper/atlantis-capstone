@@ -1,24 +1,21 @@
 import { useState, useEffect } from "react";
-import ProjectCard from "../ProjectCard";
+import ProjectCards from "../ProjectCards";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Form() {
-  const [items, setItems] = useState([]);
+  const partList = [
+    { value: "", name: "motherboard", price: 0, id: uuidv4() },
+    { value: "", name: "cpu", price: 0, id: uuidv4() },
+    { value: "", name: "gpu", price: 0, id: uuidv4() },
+    { value: "", name: "ram", price: 0, id: uuidv4() },
+    { value: "", name: "storage", price: 0, id: uuidv4() },
+    { value: "", name: "pcu", price: 0, id: uuidv4() },
+    { value: "", name: "cooling", price: 0, id: uuidv4() },
+    { value: "", name: "case", price: 0, id: uuidv4() },
+  ];
+  const [items, setItems] = useState(partList);
   const [projects, setProjects] = useState([]);
   const [projectName, setProjectName] = useState("");
-
-  useEffect(() => {
-    const partList = [
-      { value: "", name: "motherboard", price: 0, id: crypto.randomUUID() },
-      { value: "", name: "cpu", price: 0, id: crypto.randomUUID() },
-      { value: "", name: "gpu", price: 0, id: crypto.randomUUID() },
-      { value: "", name: "ram", price: 0, id: crypto.randomUUID() },
-      { value: "", name: "storage", price: 0, id: crypto.randomUUID() },
-      { value: "", name: "pcu", price: 0, id: crypto.randomUUID() },
-      { value: "", name: "cooling", price: 0, id: crypto.randomUUID() },
-      { value: "", name: "case", price: 0, id: crypto.randomUUID() },
-    ];
-    setItems(partList);
-  }, []);
 
   const handleAddItem = () => {
     setItems([
@@ -49,7 +46,7 @@ export default function Form() {
       items: items,
     };
 
-    const resetItems = items.map((item) => {
+    const resetItems = partList.map((item) => {
       return { ...item, price: 0, value: "" };
     });
 
@@ -101,7 +98,7 @@ export default function Form() {
         Zeile hinzufügen
       </button>
       <button type="submit">Formular absenden</button>
-      <ProjectCard projects={projects} />
+      <ProjectCards projects={projects} />
     </form>
   );
 }
