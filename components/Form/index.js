@@ -1,28 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-
-const partList = [
-  { value: "", name: "motherboard", price: 0, id: 1 },
-  { value: "", name: "cpu", price: 0, id: 2 },
-  { value: "", name: "gpu", price: 0, id: 3 },
-  { value: "", name: "ram", price: 0, id: 4 },
-  { value: "", name: "storage", price: 0, id: 5 },
-  { value: "", name: "pcu", price: 0, id: 6 },
-  { value: "", name: "cooling", price: 0, id: 7 },
-  { value: "", name: "case", price: 0, id: 8 },
-];
+import ProjectCard from "../ProjectCard";
 
 export default function Form() {
-  const [items, setItems] = useState(partList);
+  const [items, setItems] = useState([]);
   const [projects, setProjects] = useState([]);
   const [projectName, setProjectName] = useState("");
 
+  useEffect(() => {
+    const partList = [
+      {
+        value: "",
+        name: "motherboard",
+        price: 0,
+        id: crypto.randomUUID(),
+      },
+      { value: "", name: "cpu", price: 0, id: crypto.randomUUID() },
+      { value: "", name: "gpu", price: 0, id: crypto.randomUUID() },
+      { value: "", name: "ram", price: 0, id: crypto.randomUUID() },
+      { value: "", name: "storage", price: 0, id: crypto.randomUUID() },
+      { value: "", name: "pcu", price: 0, id: crypto.randomUUID() },
+      { value: "", name: "cooling", price: 0, id: crypto.randomUUID() },
+      { value: "", name: "case", price: 0, id: crypto.randomUUID() },
+    ];
+    setItems(partList);
+  }, []);
+
   const handleAddItem = () => {
-    setItems([...items, { name: "", price: "", id: crypto.randomUUID() }]);
+    setItems([
+      ...items,
+      { value: "", name: "", price: "", id: crypto.randomUUID() },
+    ]);
   };
 
   const handleItemChange = (index, field, value) => {
-    console.log({ field, value });
     const newItems = [...items];
     newItems[index][field] = value;
     setItems(newItems);
@@ -37,7 +48,7 @@ export default function Form() {
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    const newProject = { ...data, id: crypto.randomUUID() };
+    // const newProject = { ...data, id: crypto.randomUUID() };
 
     //neues Projekt-Objekt erstellen
     const project = {
@@ -45,7 +56,7 @@ export default function Form() {
       items: items,
     };
 
-    const resetItems = partList.map((item) => {
+    const resetItems = items.map((item) => {
       return { ...item, price: 0, value: "" };
     });
 
@@ -54,7 +65,7 @@ export default function Form() {
 
     // Formular-Eingaben zurücksetzen
     setItems(resetItems);
-    console.log("PARTLIST", partList);
+
     setProjectName("");
     event.target.reset();
   };
@@ -98,35 +109,7 @@ export default function Form() {
         Zeile hinzufügen
       </button>
       <button type="submit">Formular absenden</button>
-
-      <div className="product-list">
-        {projects.map((project, index) => {
-          let totalPrice = 0;
-          return (
-            <div key={index}>
-              <h2>{project.name}</h2>
-              <ul>
-                {project.items.map((item, index) => {
-                  totalPrice += Number(item.price);
-                  return (
-                    <li key={index}>
-                      <p>
-                        {item.value === ""
-                          ? item.name.toUpperCase()
-                          : item.value.toUpperCase()}
-                        : {item.price}$
-                      </p>
-                    </li>
-                  );
-                })}
-              </ul>
-              <p>Total: {totalPrice}$</p>
-            </div>
-          );
-        })}
-      </div>
+      <ProjectCard projects={projects} />
     </form>
   );
 }
-
-const StyledProjectCard = styled.div``;
