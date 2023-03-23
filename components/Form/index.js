@@ -1,18 +1,9 @@
 import ProjectCards from "../ProjectCards";
 import { v4 as uuidv4 } from "uuid";
 import { useImmer } from "use-immer";
+import { partList } from "../../lib/initialValues";
 
 export default function Form() {
-  const partList = [
-    { value: "", name: "motherboard", price: 0, id: uuidv4() },
-    { value: "", name: "cpu", price: 0, id: uuidv4() },
-    { value: "", name: "gpu", price: 0, id: uuidv4() },
-    { value: "", name: "ram", price: 0, id: uuidv4() },
-    { value: "", name: "storage", price: 0, id: uuidv4() },
-    { value: "", name: "pcu", price: 0, id: uuidv4() },
-    { value: "", name: "cooling", price: 0, id: uuidv4() },
-    { value: "", name: "case", price: 0, id: uuidv4() },
-  ];
   const [items, setItems] = useImmer(partList);
   const [projects, setProjects] = useImmer([]);
   const [projectName, setProjectName] = useImmer("");
@@ -22,9 +13,12 @@ export default function Form() {
   };
 
   const handleItemChange = (index, field, value) => {
-    const newItems = [...items];
-    newItems[index][field] = value;
-    setItems(newItems);
+    // const newItems = [...items];
+    // newItems[index][field] = value;
+    // setItems(newItems);
+    setItems((draft) => {
+      draft[index][field] = value;
+    });
   };
 
   const handleProjectNameChange = (event) => {

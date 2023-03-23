@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useImmer } from "use-immer";
 import styled from "styled-components";
 import EditForm from "../EditForm";
 
@@ -14,7 +14,7 @@ const StyledProjectCard = styled.div`
 `;
 
 export default function ProductCard({ project, handleDelete, hasData }) {
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useImmer(false);
 
   let totalPrice = 0;
 
