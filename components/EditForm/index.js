@@ -1,6 +1,20 @@
-export default function EditForm({ project }) {
+import { v4 as uuidv4 } from "uuid";
+
+export default function EditForm({ project, handleEdit }) {
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const editProject = {
+      name: project.name,
+      items: project.items,
+      id: uuidv4(),
+    };
+
+    handleEdit(project.id, editProject);
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       {project.items.map((item) => {
         return (
           <div key={item.id}>

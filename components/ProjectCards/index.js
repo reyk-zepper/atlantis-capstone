@@ -1,17 +1,25 @@
 import styled from "styled-components";
 import ProductCard from "../ProductCard";
 
-export default function ProjectCards({ projects, handleDelete }) {
+export default function ProjectCards({ projects, handleDelete, handleEdit }) {
   const hasData = projects && projects.length > 0;
 
   return (
     <>
       {hasData && (
-        <ProductCard
-          hasData={hasData}
-          handleDelete={handleDelete}
-          projects={projects}
-        />
+        <div>
+          {projects?.map((project) => {
+            return (
+              <ProductCard
+                key={project.id}
+                project={project}
+                handleDelete={handleDelete}
+                hasData={hasData}
+                handleEdit={handleEdit}
+              />
+            );
+          })}
+        </div>
       )}
     </>
   );

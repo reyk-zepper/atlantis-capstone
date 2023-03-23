@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
 import ProjectCards from "../ProjectCards";
 import { v4 as uuidv4 } from "uuid";
+import { useImmer } from "use-immer";
 
 export default function Form() {
   const partList = [
@@ -13,9 +13,9 @@ export default function Form() {
     { value: "", name: "cooling", price: 0, id: uuidv4() },
     { value: "", name: "case", price: 0, id: uuidv4() },
   ];
-  const [items, setItems] = useState(partList);
-  const [projects, setProjects] = useState([]);
-  const [projectName, setProjectName] = useState("");
+  const [items, setItems] = useImmer(partList);
+  const [projects, setProjects] = useImmer([]);
+  const [projectName, setProjectName] = useImmer("");
 
   const handleAddItem = () => {
     setItems([...items, { value: "", name: "", price: "", id: uuidv4() }]);
@@ -60,6 +60,17 @@ export default function Form() {
     setProjects(updatedList);
   }
 
+  function handleEdit(id, payload) {
+    const tempProjects = projects.map((project) => {
+      if (project.id === id) {
+        return payload;
+      } else {
+        return project;
+      }
+    });
+    setProjects(tempProjects);
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -100,7 +111,11 @@ export default function Form() {
         </button>
         <button type="submit">save</button>
       </form>
-      <ProjectCards handleDelete={handleDelete} projects={projects} />
+      <ProjectCards
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+        projects={projects}
+      />
     </>
   );
 }
