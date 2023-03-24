@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import ProductCard from "../ProductCard";
+import useStore from "../../hooks/useStore";
 
-export default function ProjectCards({ projects, handleDelete, handleEdit }) {
+export default function ProjectCards({ handleEdit }) {
+  const [projects] = useStore((state) => [state.projects]);
   const hasData = projects && projects.length > 0;
-
   return (
     <>
       {hasData && (
@@ -13,7 +14,6 @@ export default function ProjectCards({ projects, handleDelete, handleEdit }) {
               <ProductCard
                 key={project.id}
                 project={project}
-                handleDelete={handleDelete}
                 hasData={hasData}
                 handleEdit={handleEdit}
               />

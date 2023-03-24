@@ -43,10 +43,7 @@ export default function Form() {
     });
 
     //das neue Projekt zur Liste der Produkte hinzufügen
-
     addToProject(project);
-
-    console.log({ projects });
 
     // Formular-Eingaben zurücksetzen
     setItems(resetItems);
@@ -54,11 +51,6 @@ export default function Form() {
     setProjectName("");
     event.target.reset();
   };
-
-  function handleDelete(id) {
-    const updatedList = projects.filter((project) => project.id !== id);
-    setProjects(updatedList);
-  }
 
   function handleEdit(id, payload) {
     const tempProjects = projects.map((project) => {
@@ -111,11 +103,7 @@ export default function Form() {
         </button>
         <button type="submit">save</button>
       </form>
-      <ProjectCards
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-        projects={projects}
-      />
+      <ProjectCards handleEdit={handleEdit} />
     </>
   );
 }
