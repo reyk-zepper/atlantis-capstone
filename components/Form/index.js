@@ -2,10 +2,16 @@ import ProjectCards from "../ProjectCards";
 import { v4 as uuidv4 } from "uuid";
 import { useImmer } from "use-immer";
 import { partList } from "../../lib/initialValues";
+import useStore from "../../hooks/useStore";
 
 export default function Form() {
   const [items, setItems] = useImmer(partList);
-  const [projects, setProjects] = useImmer([]);
+  const [projects, setProjects, addToProject] = useStore((state) => [
+    state.projects,
+    state.setProjects,
+    state.addToProject,
+  ]);
+
   const [projectName, setProjectName] = useImmer("");
 
   const handleAddItem = () => {
@@ -13,9 +19,6 @@ export default function Form() {
   };
 
   const handleItemChange = (index, field, value) => {
-    // const newItems = [...items];
-    // newItems[index][field] = value;
-    // setItems(newItems);
     setItems((draft) => {
       draft[index][field] = value;
     });
@@ -40,7 +43,10 @@ export default function Form() {
     });
 
     //das neue Projekt zur Liste der Produkte hinzufügen
-    setProjects([...projects, project]);
+
+    addToProject(project);
+
+    console.log({ projects });
 
     // Formular-Eingaben zurücksetzen
     setItems(resetItems);
