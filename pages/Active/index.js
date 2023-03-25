@@ -1,7 +1,10 @@
+import ProjectCards from "../../components/ProjectCards";
+
 export default function ActivePage() {
   return (
-    <main>
-      <h2>Hello World!</h2>
-    </main>
+    <>
+      <h2>Active Projects</h2>
+      <ProjectCards />
+    </>
   );
 }
