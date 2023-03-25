@@ -25,7 +25,7 @@ export default function ProductCard({ project, hasData }) {
   }
 
   return edit ? (
-    <EditForm key={project.id} project={project} />
+    <EditForm toggleEdit={toggleEdit} key={project.id} project={project} />
   ) : (
     <StyledProjectCard hasData={hasData} key={project.id}>
       <h2>Project: {project.name}</h2>
@@ -48,11 +48,6 @@ export default function ProductCard({ project, hasData }) {
       <button type="button" onClick={toggleEdit}>
         edit
       </button>
-      {!edit && (
-        <button onClick={() => deleteProject(project.id)} type="button">
-          delete
-        </button>
-      )}
     </StyledProjectCard>
   );
 }

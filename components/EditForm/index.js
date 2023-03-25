@@ -1,19 +1,25 @@
 import { v4 as uuidv4 } from "uuid";
 import { useImmer } from "use-immer";
+import useStore from "../../hooks/useStore";
 
-export default function EditForm({ project }) {
+export default function EditForm({ project, toggleEdit }) {
   const [projectName, setProjectName] = useImmer(project.name);
   const [items, setItems] = useImmer(project.items);
+  const [editProject, deleteProject] = useStore((state) => [
+    state.editProject,
+    state.deleteProject,
+  ]);
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    const editProject = {
+    const editedProject = {
       name: event.target.projectname.value,
       items: items,
       id: project.id,
     };
-    console.log({ editProject });
+    editProject(editedProject);
+    toggleEdit();
   }
   //add a new item
   const handleAddItem = () => {
@@ -70,6 +76,10 @@ export default function EditForm({ project }) {
         ✚
       </button>
       <button type="submit">save</button>
+
+      <button onClick={() => deleteProject(project.id)} type="button">
+        delete
+      </button>
     </form>
   );
 }
