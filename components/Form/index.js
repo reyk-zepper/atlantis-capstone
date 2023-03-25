@@ -1,4 +1,3 @@
-import ProjectCards from "../ProjectCards";
 import { v4 as uuidv4 } from "uuid";
 import { useImmer } from "use-immer";
 import { partList } from "../../lib/initialValues";
@@ -44,6 +43,7 @@ export default function Form() {
     setItems(resetItems);
 
     setProjectName("");
+    alert("project saved!");
     event.target.reset();
   };
 
@@ -87,7 +87,6 @@ export default function Form() {
         </button>
         <button type="submit">save</button>
       </form>
-      <ProjectCards />
     </>
   );
 }
