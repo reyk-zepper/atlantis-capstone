@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useImmer } from "use-immer";
 import { partList } from "../../lib/initialValues";
 import useStore from "../../hooks/useStore";
+import Swal from "sweetalert2";
 
 export default function Form() {
   const [items, setItems] = useImmer(partList);
@@ -43,7 +44,7 @@ export default function Form() {
     setItems(resetItems);
 
     setProjectName("");
-    alert("project saved!");
+    Swal.fire("Good job!", "You saved a new project!", "success");
     event.target.reset();
   };
 

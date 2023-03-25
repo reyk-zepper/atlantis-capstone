@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { useImmer } from "use-immer";
 import useStore from "../../hooks/useStore";
+import Swal from "sweetalert2";
 
 export default function EditForm({ project, toggleEdit }) {
   const [projectName, setProjectName] = useImmer(project.name);
@@ -36,6 +37,22 @@ export default function EditForm({ project, toggleEdit }) {
   //change project-name
   const handleProjectNameChange = (event) => {
     setProjectName(event.target.value);
+  };
+
+  const handleDeleteItem = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProject(id);
+      }
+    });
   };
 
   return (
@@ -77,7 +94,7 @@ export default function EditForm({ project, toggleEdit }) {
       </button>
       <button type="submit">save</button>
 
-      <button onClick={() => deleteProject(project.id)} type="button">
+      <button onClick={() => handleDeleteItem(project.id)} type="button">
         delete
       </button>
     </form>
