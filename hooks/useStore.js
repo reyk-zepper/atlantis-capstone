@@ -4,7 +4,7 @@ import { immer } from "zustand/middleware/immer";
 const config = (set) => {
   const initialState = {
     projects: [],
-    addToProject: (newProject) => {
+    addProject: (newProject) => {
       set((draft) => {
         draft.projects.push(newProject);
       });

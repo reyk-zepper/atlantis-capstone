@@ -1,6 +1,7 @@
 import { useImmer } from "use-immer";
 import styled from "styled-components";
 import EditForm from "../EditForm";
+import useStore from "../../hooks/useStore";
 
 const StyledProjectCard = styled.div`
   display: flex;
@@ -15,6 +16,7 @@ const StyledProjectCard = styled.div`
 
 export default function ProductCard({ project, handleDelete, hasData }) {
   const [edit, setEdit] = useImmer(false);
+  const [deleteProject] = useStore((state) => [state.deleteProject]);
 
   let totalPrice = 0;
 
@@ -46,8 +48,8 @@ export default function ProductCard({ project, handleDelete, hasData }) {
       <button type="button" onClick={toggleEdit}>
         edit
       </button>
-      {edit && (
-        <button onClick={() => handleDelete(project.id)} type="button">
+      {!edit && (
+        <button onClick={() => deleteProject(project.id)} type="button">
           delete
         </button>
       )}

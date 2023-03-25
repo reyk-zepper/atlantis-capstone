@@ -6,12 +6,7 @@ import useStore from "../../hooks/useStore";
 
 export default function Form() {
   const [items, setItems] = useImmer(partList);
-  const [projects, setProjects, addToProject] = useStore((state) => [
-    state.projects,
-    state.setProjects,
-    state.addToProject,
-  ]);
-
+  const [addProject] = useStore((state) => [state.addProject]);
   const [projectName, setProjectName] = useImmer("");
 
   const handleAddItem = () => {
@@ -43,7 +38,7 @@ export default function Form() {
     });
 
     //das neue Projekt zur Liste der Produkte hinzufügen
-    addToProject(project);
+    addProject(project);
 
     // Formular-Eingaben zurücksetzen
     setItems(resetItems);
@@ -51,17 +46,6 @@ export default function Form() {
     setProjectName("");
     event.target.reset();
   };
-
-  function handleEdit(id, payload) {
-    const tempProjects = projects.map((project) => {
-      if (project.id === id) {
-        return payload;
-      } else {
-        return project;
-      }
-    });
-    setProjects(tempProjects);
-  }
 
   return (
     <>
@@ -103,7 +87,7 @@ export default function Form() {
         </button>
         <button type="submit">save</button>
       </form>
-      <ProjectCards handleEdit={handleEdit} />
+      <ProjectCards />
     </>
   );
 }
