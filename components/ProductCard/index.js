@@ -14,7 +14,7 @@ const StyledProjectCard = styled.div`
   margin: 10px;
 `;
 
-export default function ProductCard({ project, handleDelete, hasData }) {
+export default function ProductCard({ project, hasData }) {
   const [edit, setEdit] = useImmer(false);
   const [deleteProject] = useStore((state) => [state.deleteProject]);
 

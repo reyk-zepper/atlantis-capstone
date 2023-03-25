@@ -26,7 +26,7 @@ export default function Form() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    //neues Projekt-Objekt erstellen
+    //create new project-object
     const project = {
       name: event.target.projectname.value,
       items: items,
@@ -37,10 +37,10 @@ export default function Form() {
       return { ...item, price: 0, value: "" };
     });
 
-    //das neue Projekt zur Liste der Produkte hinzufügen
+    //add new project to list
     addProject(project);
 
-    // Formular-Eingaben zurücksetzen
+    // reset form
     setItems(resetItems);
 
     setProjectName("");
