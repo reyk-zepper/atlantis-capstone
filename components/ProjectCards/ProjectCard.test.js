@@ -1,29 +1,33 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import ProjectCard from "./index";
+import ProjectCards from "./index";
 
-describe("ProjectCard component", () => {
-  const projects = [
-    {
-      name: "Project 1",
-      items: [
-        { id: 1, name: "Item 1", value: "", price: 10 },
-        { id: 2, name: "Item 2", value: "value", price: 20 },
-      ],
-    },
+describe("ProjectCards component", () => {
+  const mockProjects = [
+    { id: 1, name: "Project 1", description: "Description for project 1" },
+    { id: 2, name: "Project 2", description: "Description for project 2" },
   ];
 
-  it("should render the project name and items correctly", () => {
-    const { getByText } = render(<ProjectCard projects={projects} />);
-
-    expect(getByText("Project: Project 1")).toBeInTheDocument();
-    expect(getByText("ITEM 1: 10$")).toBeInTheDocument();
-    expect(getByText("VALUE: 20$")).toBeInTheDocument();
+  it("should render without errors", () => {
+    const { queryByTestId } = render(<ProjectCards />);
+    const productCardsComponent = queryByTestId("product-cards");
+    expect(productCardsComponent).toBeNull();
   });
 
-  it("should calculate the total price correctly", () => {
-    const { getByText } = render(<ProjectCard projects={projects} />);
+  it("should pass correct props to ProductCard components", () => {
+    const { queryAllByTestId } = render(
+      <ProjectCards projects={mockProjects} />
+    );
+    const productCardComponents = queryAllByTestId("product-card");
 
-    expect(getByText("Total: 30$")).toBeInTheDocument();
+    productCardComponents.forEach((productCardComponent, index) => {
+      const projectProp = productCardComponent.getAttribute("project");
+      const hasDataProp = productCardComponent.getAttribute("hasData");
+      const keyProp = productCardComponent.getAttribute("key");
+
+      expect(JSON.parse(projectProp)).toEqual(mockProjects[index]);
+      expect(JSON.parse(hasDataProp)).toBe(true);
+      expect(keyProp).toBe(mockProjects[index].id.toString());
+    });
   });
 });
