@@ -15,8 +15,9 @@ const StyledNavigation = styled.div`
   width: 100vw;
   justify-content: center;
   gap: 3rem;
-  position: absolute;
-  bottom: 0.5rem;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
 
   border: solid black 0.025rem;
   padding: 1rem;
