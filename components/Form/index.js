@@ -3,8 +3,10 @@ import { useImmer } from "use-immer";
 import { partList } from "../../lib/initialValues";
 import useStore from "../../hooks/useStore";
 import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 
 export default function Form() {
+  const router = useRouter();
   const [items, setItems] = useImmer(partList);
   const [addProject] = useStore((state) => [state.addProject]);
   const [projectName, setProjectName] = useImmer("");
@@ -44,7 +46,20 @@ export default function Form() {
     setItems(resetItems);
 
     setProjectName("");
-    Swal.fire("Good job!", "You saved a new project!", "success");
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire("Saved!", "", "success").then(router.push("/Active"));
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
     event.target.reset();
   };
 
@@ -53,7 +68,7 @@ export default function Form() {
       <form onSubmit={handleSubmit}>
         <input
           required
-          max={25}
+          maxLength={25}
           type="text"
           name="projectname"
           placeholder="project name"
@@ -65,7 +80,7 @@ export default function Form() {
             <div key={item.id}>
               <input
                 required
-                max={60}
+                maxLength={60}
                 name={item.name}
                 type="text"
                 placeholder={item.name}

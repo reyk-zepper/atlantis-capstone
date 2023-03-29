@@ -34,11 +34,9 @@ export default function ProductCard({ project, hasData }) {
           totalPrice += Number(item.price);
           return (
             <li key={item.id}>
+              <p>{item.name.toUpperCase()}</p>
               <p>
-                {item.value === ""
-                  ? item.name.toUpperCase()
-                  : item.value.toUpperCase()}
-                : {item.price}$
+                {item.value.toUpperCase()}: {item.price}$
               </p>
             </li>
           );
