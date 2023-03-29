@@ -1,7 +1,18 @@
 import Link from "next/link";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 export default function Navigation() {
+  const router = useRouter();
+  if (router.pathname === "/AddProject") {
+    return (
+      <StyledNavigation>
+        <button type="button" onClick={() => router.back()}>
+          &larr; back
+        </button>
+      </StyledNavigation>
+    );
+  }
   return (
     <StyledNavigation>
       <Link href={"/"}>HOME</Link>
