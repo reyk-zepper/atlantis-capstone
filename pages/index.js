@@ -1,9 +1,11 @@
-import Form from "../components/Form";
+import styled from "styled-components";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <main>
-      <Form />
-    </main>
+    <div>
+      <p>start a new project</p>
+      <Link href={"/AddProject"}>&oplus;</Link>
+    </div>
   );
 }
