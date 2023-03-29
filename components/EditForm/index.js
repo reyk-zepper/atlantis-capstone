@@ -81,6 +81,7 @@ export default function EditForm({ project, toggleEdit }) {
               type="number"
               name={`${item.name}price`}
               value={item.price}
+              placeholder={0}
               onChange={(event) =>
                 handleItemChange(index, "price", event.target.value)
               }

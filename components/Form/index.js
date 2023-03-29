@@ -34,7 +34,7 @@ export default function Form() {
     };
 
     const resetItems = partList.map((item) => {
-      return { ...item, price: 0, value: "" };
+      return { ...item, price: "", value: "" };
     });
 
     //add new project to list
@@ -52,6 +52,8 @@ export default function Form() {
     <>
       <form onSubmit={handleSubmit}>
         <input
+          required
+          max={25}
           type="text"
           name="projectname"
           placeholder="project name"
@@ -62,6 +64,8 @@ export default function Form() {
           return (
             <div key={item.id}>
               <input
+                required
+                max={60}
                 name={item.name}
                 type="text"
                 placeholder={item.name}
@@ -72,9 +76,13 @@ export default function Form() {
               />
 
               <input
+                required
                 type="number"
+                min={0}
+                max={10000}
                 name={`${item.name}price`}
                 value={item.price}
+                placeholder={0}
                 onChange={(event) =>
                   handleItemChange(index, "price", event.target.value)
                 }
