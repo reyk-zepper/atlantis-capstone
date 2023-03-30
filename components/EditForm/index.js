@@ -3,7 +3,7 @@ import { useImmer } from "use-immer";
 import useStore from "../../hooks/useStore";
 import Swal from "sweetalert2";
 
-export default function EditForm({ project, toggleEdit }) {
+export default function EditForm({ project }) {
   const [projectName, setProjectName] = useImmer(project.name);
   const [items, setItems] = useImmer(project.items);
   const [editProject, deleteProject] = useStore((state) => [
@@ -20,7 +20,6 @@ export default function EditForm({ project, toggleEdit }) {
       id: project.id,
     };
     editProject(editedProject);
-    toggleEdit();
   }
   //add a new item
   const handleAddItem = () => {
