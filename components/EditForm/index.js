@@ -2,10 +2,13 @@ import { v4 as uuidv4 } from "uuid";
 import { useImmer } from "use-immer";
 import useStore from "../../hooks/useStore";
 import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 
 export default function EditForm({ project }) {
-  const [projectName, setProjectName] = useImmer(project.name);
-  const [items, setItems] = useImmer(project.items);
+  const router = useRouter();
+  const { id } = router.query;
+  const [projectName, setProjectName] = useImmer(project?.name);
+  const [items, setItems] = useImmer(project?.items);
   const [editProject, deleteProject] = useStore((state) => [
     state.editProject,
     state.deleteProject,
@@ -20,6 +23,29 @@ export default function EditForm({ project }) {
       id: project.id,
     };
     editProject(editedProject);
+
+    let timerInterval;
+
+    Swal.fire({
+      title: "Redirecting back to active projects!",
+      html: "I will redirect in <b></b> milliseconds.",
+      timer: 1500,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+        const b = Swal.getHtmlContainer().querySelector("b");
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft();
+        }, 100);
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        router.back();
+      }
+    });
   }
   //add a new item
   const handleAddItem = () => {
@@ -50,9 +76,14 @@ export default function EditForm({ project }) {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteProject(id);
+        router.back();
       }
     });
   };
+
+  if (project === undefined) {
+    return <h2> there is no prject with this id: {id}</h2>;
+  }
 
   return (
     <form onSubmit={handleSubmit}>

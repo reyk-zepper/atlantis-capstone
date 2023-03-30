@@ -4,7 +4,9 @@ import { useRouter } from "next/router";
 
 export default function Navigation() {
   const router = useRouter();
-  if (router.pathname === "/AddProject") {
+  const { id } = router.query;
+
+  if (id !== undefined || router.pathname === "/AddProject") {
     return (
       <StyledNavigation>
         <button type="button" onClick={() => router.back()}>
