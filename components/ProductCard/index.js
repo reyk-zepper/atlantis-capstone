@@ -1,7 +1,5 @@
-import { useImmer } from "use-immer";
+import Link from "next/link";
 import styled from "styled-components";
-import EditForm from "../EditForm";
-import useStore from "../../hooks/useStore";
 
 const StyledProjectCard = styled.div`
   display: flex;
@@ -15,18 +13,9 @@ const StyledProjectCard = styled.div`
 `;
 
 export default function ProductCard({ project, hasData }) {
-  const [edit, setEdit] = useImmer(false);
-  const [deleteProject] = useStore((state) => [state.deleteProject]);
-
   let totalPrice = 0;
 
-  function toggleEdit() {
-    setEdit(!edit);
-  }
-
-  return edit ? (
-    <EditForm toggleEdit={toggleEdit} key={project.id} project={project} />
-  ) : (
+  return (
     <StyledProjectCard hasData={hasData} key={project.id}>
       <h2>Project: {project.name}</h2>
       <ul>
@@ -43,9 +32,7 @@ export default function ProductCard({ project, hasData }) {
         })}
       </ul>
       <p>Total: {totalPrice}$</p>
-      <button type="button" onClick={toggleEdit}>
-        edit
-      </button>
+      <Link href={`/Edit/${project.id}`}>edit</Link>
     </StyledProjectCard>
   );
 }
