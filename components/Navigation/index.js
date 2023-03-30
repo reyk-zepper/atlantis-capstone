@@ -1,11 +1,22 @@
 import Link from "next/link";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 export default function Navigation() {
+  const router = useRouter();
+  if (router.pathname === "/AddProject") {
+    return (
+      <StyledNavigation>
+        <button type="button" onClick={() => router.back()}>
+          &larr; back
+        </button>
+      </StyledNavigation>
+    );
+  }
   return (
     <StyledNavigation>
-      <Link href={"/"}>HOME</Link>
-      <Link href={"/Active"}>Active Projects</Link>
+      <StyledLink href={"/"}>HOME</StyledLink>
+      <StyledLink href={"/Active"}>Active Projects</StyledLink>
     </StyledNavigation>
   );
 }
@@ -21,4 +32,16 @@ const StyledNavigation = styled.div`
 
   border: solid black 0.025rem;
   padding: 1rem;
+`;
+const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  font-weight: bold;
+  font-size: 2rem;
+
+  &:hover {
+    text-decoration: underline;
+    color: hotpink;
+  }
 `;

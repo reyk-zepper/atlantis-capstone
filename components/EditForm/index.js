@@ -58,6 +58,7 @@ export default function EditForm({ project, toggleEdit }) {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        maxLength={25}
         type="text"
         name="projectname"
         placeholder="project name"
@@ -68,6 +69,7 @@ export default function EditForm({ project, toggleEdit }) {
         return (
           <div key={item.id}>
             <input
+              maxLength={60}
               name={item.name}
               type="text"
               placeholder={item.name}
@@ -79,8 +81,11 @@ export default function EditForm({ project, toggleEdit }) {
 
             <input
               type="number"
+              min={0}
+              max={10000}
               name={`${item.name}price`}
               value={item.price}
+              placeholder={0}
               onChange={(event) =>
                 handleItemChange(index, "price", event.target.value)
               }
