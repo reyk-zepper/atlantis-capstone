@@ -1,11 +1,16 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { formatToEUR } from "@/helper/formatToEUR";
 
 export default function OverviewCard({ project }) {
+  const sumUpArray = (accumulator, currentValue) => accumulator + currentValue;
+  const totalPrice = project.items
+    .map((item) => item.price)
+    .reduce(sumUpArray, 0);
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
-      <p>Total: {totalPrice}$</p>
+      <p>Total: {formatToEUR(totalPrice)}</p>
       <Link href={`/Details/${project.id}`}>details</Link>
     </StyledProjectCard>
   );
