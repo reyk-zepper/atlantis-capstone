@@ -6,17 +6,17 @@ const StyledProjectCard = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: ${({ hasData }) => (hasData ? "1px solid black" : "none")};
+  border: 1px solid black;
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
 `;
 
-export default function ProductCard({ project, hasData }) {
+export default function ProductCard({ project }) {
   let totalPrice = 0;
 
   return (
-    <StyledProjectCard hasData={hasData} key={project.id}>
+    <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
       <ul>
         {project.items.map((item) => {
