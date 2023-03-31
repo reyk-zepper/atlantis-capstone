@@ -16,7 +16,6 @@ const config = (set) => {
     },
 
     editProject: (editProject) => {
-      console.log(editProject);
       set((draft) => {
         const draftProjectArr = draft.projects.map((project) => {
           if (project.id === editProject.id) {
