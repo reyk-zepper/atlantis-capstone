@@ -7,6 +7,10 @@ export default function OverviewCard({ project }) {
   const totalPrice = project.items
     .map((item) => item.price)
     .reduce(sumUpArray, 0);
+
+  if (project === undefined) {
+    return <h2>something went wrong</h2>;
+  }
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
