@@ -4,7 +4,7 @@ import { formatToEUR } from "../../helper/formatToEUR";
 
 export default function ProductCard({ project }) {
   const sumUpArray = (accumulator, currentValue) => accumulator + currentValue;
-  const totalPrice = project.items
+  const totalPrice = project?.items
     .map((item) => item.price)
     .reduce(sumUpArray, 0);
   if (project === undefined) {
