@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
-import { formatToEUR } from "@/helper/formatToEUR";
+import { formatToEUR } from "../../helper/formatToEUR";
 
 export default function ProductCard({ project }) {
   const sumUpArray = (accumulator, currentValue) => accumulator + currentValue;
