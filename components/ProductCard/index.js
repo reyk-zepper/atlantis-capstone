@@ -1,17 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
 
-const StyledProjectCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px;
-`;
-
 export default function ProductCard({ project }) {
   let totalPrice = 0;
 
@@ -36,3 +25,14 @@ export default function ProductCard({ project }) {
     </StyledProjectCard>
   );
 }
+
+const StyledProjectCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+`;
