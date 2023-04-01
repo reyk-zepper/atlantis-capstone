@@ -12,9 +12,9 @@ export default function DetailsPage() {
 
   if (!!projects.find((element) => element.id === id) === true) {
     const project = projects.find((element) => element.id === id);
-    return <ProductCard project={project} />;
+    return <ProductCard project={project} editState={"active"} />;
   } else {
     const project = doneProjects.find((element) => element.id === id);
-    return <ProductCard project={project} />;
+    return <ProductCard project={project} editState={"done"} />;
   }
 }
