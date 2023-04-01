@@ -31,6 +31,25 @@ const config = (set) => {
     },
 
     //done projects methods
+    moveToDone: (id) => {
+      set((draft) => {
+        const tempProject = draft.projects.find((project) => project.id === id);
+        draft.doneProjects.push(tempProject);
+        draft.projects = draft.projects.filter((project) => project.id !== id);
+      });
+    },
+
+    moveToActive: (id) => {
+      set((draft) => {
+        const tempProject = draft.doneProjects.find(
+          (project) => project.id === id
+        );
+        draft.projects.push(tempProject);
+        draft.doneProjects = draft.doneProjects.filter(
+          (project) => project.id !== id
+        );
+      });
+    },
   };
   return initialState;
 };

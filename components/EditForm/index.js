@@ -9,9 +9,10 @@ export default function EditForm({ project }) {
   const { id } = router.query;
   const [projectName, setProjectName] = useImmer(project?.name);
   const [items, setItems] = useImmer(project?.items);
-  const [editProject, deleteProject] = useStore((state) => [
+  const [editProject, deleteProject, moveToDone] = useStore((state) => [
     state.editProject,
     state.deleteProject,
+    state.moveToDone,
   ]);
 
   function handleSubmit(event) {
@@ -81,57 +82,66 @@ export default function EditForm({ project }) {
     });
   };
 
+  const handleMoveToDone = (id) => {
+    router.push("/Done");
+    moveToDone(id);
+  };
+
   if (project === undefined) {
     return <h2> there is no prject with this id: {id}</h2>;
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        maxLength={25}
-        type="text"
-        name="projectname"
-        placeholder="project name"
-        value={projectName}
-        onChange={handleProjectNameChange}
-      />
-      {items.map((item, index) => {
-        return (
-          <div key={item.id}>
-            <input
-              maxLength={60}
-              name={item.name}
-              type="text"
-              placeholder={item.name}
-              value={item.value}
-              onChange={(event) =>
-                handleItemChange(index, "value", event.target.value)
-              }
-            />
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          maxLength={25}
+          type="text"
+          name="projectname"
+          placeholder="project name"
+          value={projectName}
+          onChange={handleProjectNameChange}
+        />
+        {items.map((item, index) => {
+          return (
+            <div key={item.id}>
+              <input
+                maxLength={60}
+                name={item.name}
+                type="text"
+                placeholder={item.name}
+                value={item.value}
+                onChange={(event) =>
+                  handleItemChange(index, "value", event.target.value)
+                }
+              />
 
-            <input
-              type="number"
-              min={0}
-              max={10000}
-              name={`${item.name}price`}
-              value={item.price}
-              placeholder={0}
-              onChange={(event) =>
-                handleItemChange(index, "price", event.target.value)
-              }
-            />
-          </div>
-        );
-      })}
+              <input
+                type="number"
+                min={0}
+                max={10000}
+                name={`${item.name}price`}
+                value={item.price}
+                placeholder={0}
+                onChange={(event) =>
+                  handleItemChange(index, "price", event.target.value)
+                }
+              />
+            </div>
+          );
+        })}
 
-      <button type="button" onClick={handleAddItem}>
-        ✚
+        <button type="button" onClick={handleAddItem}>
+          ✚
+        </button>
+        <button type="submit">save</button>
+      </form>
+      <button type="button" onClick={() => handleMoveToDone(project.id)}>
+        move to done
       </button>
-      <button type="submit">save</button>
-
       <button onClick={() => handleDeleteItem(project.id)} type="button">
         delete
       </button>
-    </form>
+    </div>
   );
 }

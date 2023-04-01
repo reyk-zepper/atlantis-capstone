@@ -5,7 +5,16 @@ import useStore from "@/hooks/useStore";
 export default function DetailsPage() {
   const router = useRouter();
   const { id } = router.query;
-  const [projects] = useStore((state) => [state.projects]);
-  const project = projects.find((element) => element.id === id);
-  return <ProductCard project={project} />;
+  const [projects, doneProjects] = useStore((state) => [
+    state.projects,
+    state.doneProjects,
+  ]);
+
+  if (!!projects.find((element) => element.id === id) === true) {
+    const project = projects.find((element) => element.id === id);
+    return <ProductCard project={project} />;
+  } else {
+    const project = doneProjects.find((element) => element.id === id);
+    return <ProductCard project={project} />;
+  }
 }
