@@ -1,11 +1,7 @@
 import styled from "styled-components";
-import ProductCard from "../ProductCard";
-import useStore from "../../hooks/useStore";
-
 import OverviewCard from "../OverviewCard";
 
-export default function ProjectCards() {
-  const [projects] = useStore((state) => [state.projects]);
+export default function ProjectCards({ projects }) {
   return (
     <div>
       {projects?.map((project) => {

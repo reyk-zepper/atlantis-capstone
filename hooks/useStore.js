@@ -4,6 +4,9 @@ import { immer } from "zustand/middleware/immer";
 const config = (set) => {
   const initialState = {
     projects: [],
+    doneProjects: [],
+
+    //active projects methods
     addProject: (newProject) => {
       set((draft) => {
         draft.projects.push(newProject);
@@ -14,7 +17,6 @@ const config = (set) => {
         draft.projects = draft.projects.filter((project) => project.id !== id);
       });
     },
-
     editProject: (editProject) => {
       set((draft) => {
         const draftProjectArr = draft.projects.map((project) => {
@@ -27,6 +29,8 @@ const config = (set) => {
         draft.projects = draftProjectArr;
       });
     },
+
+    //done projects methods
   };
   return initialState;
 };
