@@ -21,7 +21,7 @@ export default function EditForm({ project }) {
 
     const editedProject = {
       name: event.target.projectname.value,
-      items: items,
+      items: [...items, ...additionalItems],
       id: project.id,
     };
     editProject(editedProject);
@@ -148,7 +148,19 @@ export default function EditForm({ project }) {
                 maxLength={60}
                 name={item.name}
                 type="text"
-                placeholder={item.name}
+                placeholder={"Label"}
+                value={item.name}
+                onChange={(event) =>
+                  handleAdditionalItemChange(index, "name", event.target.value)
+                }
+              />
+
+              <input
+                required
+                maxLength={60}
+                name={item.name}
+                type="text"
+                placeholder={"Additional"}
                 value={item.value}
                 onChange={(event) =>
                   handleAdditionalItemChange(index, "value", event.target.value)
