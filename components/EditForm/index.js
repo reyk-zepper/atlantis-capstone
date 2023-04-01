@@ -9,6 +9,7 @@ export default function EditForm({ project }) {
   const { id } = router.query;
   const [projectName, setProjectName] = useImmer(project?.name);
   const [items, setItems] = useImmer(project?.items);
+  const [additionalItems, setAdditionalItems] = useImmer([]);
   const [editProject, deleteProject, moveToDone] = useStore((state) => [
     state.editProject,
     state.deleteProject,
@@ -50,12 +51,21 @@ export default function EditForm({ project }) {
   }
   //add a new item
   const handleAddItem = () => {
-    setItems([...items, { value: "", name: "", price: "", id: uuidv4() }]);
+    setAdditionalItems([
+      ...additionalItems,
+      { value: "", name: "", price: "", id: uuidv4() },
+    ]);
   };
 
   // values change
   const handleItemChange = (index, field, value) => {
     setItems((draft) => {
+      draft[index][field] = value;
+    });
+  };
+
+  const handleAdditionalItemChange = (index, field, value) => {
+    setAdditionalItems((draft) => {
       draft[index][field] = value;
     });
   };
@@ -77,7 +87,7 @@ export default function EditForm({ project }) {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteProject(id);
-        router.back();
+        router.push("/Active");
       }
     });
   };
@@ -125,6 +135,36 @@ export default function EditForm({ project }) {
                 placeholder={0}
                 onChange={(event) =>
                   handleItemChange(index, "price", event.target.value)
+                }
+              />
+            </div>
+          );
+        })}
+        {additionalItems.map((item, index) => {
+          return (
+            <div key={item.id}>
+              <input
+                required
+                maxLength={60}
+                name={item.name}
+                type="text"
+                placeholder={item.name}
+                value={item.value}
+                onChange={(event) =>
+                  handleAdditionalItemChange(index, "value", event.target.value)
+                }
+              />
+
+              <input
+                required
+                type="number"
+                min={0}
+                max={10000}
+                name={`${item.name}price`}
+                value={item.price}
+                placeholder={0}
+                onChange={(event) =>
+                  handleAdditionalItemChange(index, "price", event.target.value)
                 }
               />
             </div>
