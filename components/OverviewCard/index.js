@@ -1,32 +1,21 @@
-import Link from "next/link";
 import styled from "styled-components";
-import { formatToEUR } from "../../helper/formatToEUR";
+import Link from "next/link";
+import { formatToEUR } from "@/helper/formatToEUR";
 
-export default function ProductCard({ project }) {
+export default function OverviewCard({ project }) {
   const sumUpArray = (accumulator, currentValue) => accumulator + currentValue;
-  const totalPrice = project?.items
+  const totalPrice = project.items
     .map((item) => Number(item.price))
     .reduce(sumUpArray, 0);
+
   if (project === undefined) {
     return <h2>something went wrong</h2>;
   }
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
-      <ul>
-        {project.items.map((item) => {
-          return (
-            <li key={item.id}>
-              <p>{item.name.toUpperCase()}</p>
-              <p>
-                {item.value.toUpperCase()}: {formatToEUR(item.price)}
-              </p>
-            </li>
-          );
-        })}
-      </ul>
       <p>Total: {formatToEUR(totalPrice)}</p>
-      <Link href={`/Edit/${project.id}`}>edit</Link>
+      <Link href={`/Details/${project.id}`}>details</Link>
     </StyledProjectCard>
   );
 }

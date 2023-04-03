@@ -2,24 +2,15 @@ import styled from "styled-components";
 import ProductCard from "../ProductCard";
 import useStore from "../../hooks/useStore";
 
+import OverviewCard from "../OverviewCard";
+
 export default function ProjectCards() {
   const [projects] = useStore((state) => [state.projects]);
-  const hasData = projects && projects.length > 0;
   return (
-    <>
-      {hasData && (
-        <div>
-          {projects?.map((project) => {
-            return (
-              <ProductCard
-                key={project.id}
-                project={project}
-                hasData={hasData}
-              />
-            );
-          })}
-        </div>
-      )}
-    </>
+    <div>
+      {projects?.map((project) => {
+        return <OverviewCard project={project} key={project.id} />;
+      })}
+    </div>
   );
 }

@@ -1,13 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
 import { useImmer } from "use-immer";
-import { partList } from "../../lib/initialValues";
+import { partList2 } from "../../lib/initialValues";
 import useStore from "../../hooks/useStore";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 
 export default function Form() {
   const router = useRouter();
-  const [items, setItems] = useImmer(partList);
+  const [items, setItems] = useImmer(partList2);
   const [addProject] = useStore((state) => [state.addProject]);
   const [projectName, setProjectName] = useImmer("");
 
@@ -35,7 +35,7 @@ export default function Form() {
       id: uuidv4(),
     };
 
-    const resetItems = partList.map((item) => {
+    const resetItems = partList2.map((item) => {
       return { ...item, price: "", value: "" };
     });
 
