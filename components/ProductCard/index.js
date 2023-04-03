@@ -1,8 +1,8 @@
 import Link from "next/link";
 import styled from "styled-components";
-import { formatToEUR } from "@/helper/formatToEUR";
+import { formatToEUR } from "../../helper/formatToEUR";
 import { useRouter } from "next/router";
-import useStore from "@/hooks/useStore";
+import useStore from "../../hooks/useStore";
 
 export default function ProductCard({ project, editState }) {
   const router = useRouter();
