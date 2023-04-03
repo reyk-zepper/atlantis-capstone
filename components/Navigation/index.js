@@ -17,8 +17,9 @@ export default function Navigation() {
   }
   return (
     <StyledNavigation>
+      <StyledLink href={"/Active"}>Active</StyledLink>
       <StyledLink href={"/"}>HOME</StyledLink>
-      <StyledLink href={"/Active"}>Active Projects</StyledLink>
+      <StyledLink href={"/Done"}>Done</StyledLink>
     </StyledNavigation>
   );
 }

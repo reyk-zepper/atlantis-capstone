@@ -8,9 +8,6 @@ export default function OverviewCard({ project }) {
     .map((item) => Number(item.price))
     .reduce(sumUpArray, 0);
 
-  if (project === undefined) {
-    return <h2>something went wrong</h2>;
-  }
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>

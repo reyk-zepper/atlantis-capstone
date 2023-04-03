@@ -40,12 +40,8 @@ export default function Form() {
     });
 
     //add new project to list
-    addProject(project);
-
     // reset form
-    setItems(resetItems);
 
-    setProjectName("");
     Swal.fire({
       title: "Do you want to save the changes?",
       showDenyButton: true,
@@ -55,12 +51,17 @@ export default function Form() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire("Saved!", "", "success").then(router.push("/Active"));
+        Swal.fire("Saved!", "", "success").then(
+          router.push("/Active"),
+          addProject(project),
+          setItems(resetItems),
+          setProjectName(""),
+          event.target.reset()
+        );
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
       }
     });
-    event.target.reset();
   };
 
   return (
