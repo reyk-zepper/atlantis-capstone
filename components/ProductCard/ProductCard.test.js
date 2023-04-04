@@ -1,6 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import ProductCard from "./index";
 import { v4 as uuidv4 } from "uuid";
+import { useRouter } from "next/router";
+
+jest.mock("next/router", () => ({
+  useRouter: jest.fn(),
+}));
 
 const mockProjects = [
   {
@@ -51,6 +56,7 @@ const mockProjects = [
 
 describe("ProductCard", () => {
   it("renders an h2 element", () => {
+    useRouter.mockImplementation(() => ({ pathname: "/test" })); // Mocking useRouter hook
     render(<ProductCard project={mockProjects[0]} />);
     const headingElement = screen.getByRole("heading", { level: 2 });
     expect(headingElement).toBeInTheDocument();
