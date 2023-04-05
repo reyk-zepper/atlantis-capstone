@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 
 export default function useMedia(queries, values, defaultValue) {
-  const mediaQueryLists = queries.map((q) => window.matchMedia(q));
+  const [mediaQueryLists, setMediaQueryLists] = useState([]);
+  useEffect(() => {
+    setMediaQueryLists(queries.map((q) => window.matchMedia(q)));
+  }, []);
 
   const getValue = () => {
     const index = mediaQueryLists.findIndex((mql) => mql.matches);
