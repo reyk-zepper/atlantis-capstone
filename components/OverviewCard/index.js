@@ -12,7 +12,7 @@ export default function OverviewCard({ project }) {
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
       <p>Total: {formatToEUR(totalPrice)}</p>
-      <Link href={`/Details/${project.id}`}>details</Link>
+      <Link href={`/details/${project.id}`}>details</Link>
     </StyledProjectCard>
   );
 }

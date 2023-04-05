@@ -87,13 +87,13 @@ export default function EditForm({ project }) {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteProject(id);
-        router.push("/Active");
+        router.push("/active");
       }
     });
   };
 
   const handleMoveToDone = (id) => {
-    router.push("/Done");
+    router.push("/done");
     moveToDone(id);
   };
 
