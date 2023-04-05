@@ -7,8 +7,8 @@ import { useRouter } from "next/router";
 export default function EditForm({ project }) {
   const router = useRouter();
   const { id } = router.query;
-  const [projectName, setProjectName] = useImmer(project?.name);
-  const [items, setItems] = useImmer(project?.items);
+  const [projectName, setProjectName] = useImmer(project.name);
+  const [items, setItems] = useImmer(project.items);
   const [additionalItems, setAdditionalItems] = useImmer([]);
   const [editProject, deleteProject, moveToDone] = useStore((state) => [
     state.editProject,
@@ -105,6 +105,7 @@ export default function EditForm({ project }) {
     <div>
       <form onSubmit={handleSubmit}>
         <input
+          required
           maxLength={25}
           type="text"
           name="projectname"
@@ -116,6 +117,7 @@ export default function EditForm({ project }) {
           return (
             <div key={item.id}>
               <input
+                required
                 maxLength={60}
                 name={item.name}
                 type="text"
@@ -127,6 +129,7 @@ export default function EditForm({ project }) {
               />
 
               <input
+                required
                 type="number"
                 min={0}
                 max={10000}

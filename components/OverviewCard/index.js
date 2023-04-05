@@ -22,7 +22,7 @@ const StyledProjectCard = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  border: 1px solid rgb(var(--foreground-rgb));
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
