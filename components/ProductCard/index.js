@@ -17,7 +17,7 @@ export default function ProductCard({ project, editState }) {
   }
 
   const handleMoveToActive = (id) => {
-    router.push("/Active");
+    router.push("/active");
     moveToActive(id);
   };
 

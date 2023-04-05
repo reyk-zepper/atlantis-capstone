@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <StyledStartingContainer>
       <StyledParagraph>start a new project</StyledParagraph>
-      <StyledLink href={"/AddProject"}>&oplus;</StyledLink>
+      <StyledLink href={"/add-project"}>&oplus;</StyledLink>
     </StyledStartingContainer>
   );
 }

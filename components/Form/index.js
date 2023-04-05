@@ -52,7 +52,7 @@ export default function Form() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire("Saved!", "", "success").then(
-          router.push("/Active"),
+          router.push("/active"),
           addProject(project),
           setItems(resetItems),
           setProjectName(""),
