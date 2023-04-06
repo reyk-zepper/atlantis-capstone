@@ -5,10 +5,10 @@ import { useRouter } from "next/router";
 import useStore from "../../hooks/useStore";
 import "chart.js/auto";
 import { Bar } from "react-chartjs-2";
-import { chartOptions } from "@/helper/chartOptions";
-import { createChartData } from "@/helper/createChartData";
-import useMedia from "@/hooks/useMedia";
-import { sumTotalPrice } from "@/helper/sumTotalPrice";
+import { chartOptions } from "../../helper/chartOptions";
+import { createChartData } from "../../helper/createChartData";
+import useMedia from "../../hooks/useMedia";
+import { sumTotalPrice } from "../../helper/sumTotalPrice";
 
 export default function ProductCard({ project, editState }) {
   const router = useRouter();
