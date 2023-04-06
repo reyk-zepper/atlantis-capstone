@@ -19,6 +19,7 @@ const useMedia = (queries, values, defaultValue) => {
     return () => {
       mediaQueryLists.forEach((mql) => mql.removeListener(handler));
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return value;
