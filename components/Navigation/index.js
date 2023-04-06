@@ -6,7 +6,7 @@ export default function Navigation() {
   const router = useRouter();
   const { id } = router.query;
 
-  if (id !== undefined || router.pathname === "/AddProject") {
+  if (id !== undefined || router.pathname === "/add-project") {
     return (
       <StyledNavigation>
         <button type="button" onClick={() => router.back()}>
@@ -31,9 +31,9 @@ const StyledNavigation = styled.div`
   gap: 3rem;
   position: sticky;
   bottom: 0;
-  background-color: white;
+  background-color: rgb(var(--background-rgb));
 
-  border: solid black 0.025rem;
+  border: solid rgb(var(--foreground-rgb)); 0.025rem;
   padding: 1rem;
 `;
 const StyledLink = styled(Link)`

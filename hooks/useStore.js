@@ -1,5 +1,5 @@
-import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import createWithLocalStorage from "./createWithLocalStorage";
 
 const config = (set) => {
   const initialState = {
@@ -54,6 +54,6 @@ const config = (set) => {
   return initialState;
 };
 
-const useStore = create(immer(config));
+const useStore = createWithLocalStorage(immer(config), "projects");
 
 export default useStore;

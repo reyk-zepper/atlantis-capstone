@@ -33,5 +33,6 @@ const StyledLink = styled(Link)`
   cursor: pointer;
   &:hover {
     color: hotpink;
+    text-decoration: none;
   }
 `;

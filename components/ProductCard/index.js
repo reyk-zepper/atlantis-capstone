@@ -37,7 +37,7 @@ export default function ProductCard({ project, editState }) {
         })}
       </ul>
       <p>Total: {formatToEUR(totalPrice)}</p>
-      {editState === "active" && <Link href={`/Edit/${project.id}`}>edit</Link>}
+      {editState === "active" && <Link href={`/edit/${project.id}`}>edit</Link>}
       {editState === "done" && (
         <button type="button" onClick={() => handleMoveToActive(project.id)}>
           move to active
@@ -52,8 +52,19 @@ const StyledProjectCard = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  border: 1px solid rgb(var(--foreground-rgb));
+  gap: 10px;
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
+`;
+
+const StyledEditLink = styled(Link)`
+  border: 1px solid rgb(var(--foreground-rgb));
+  border-radius: 0.5rem;
+  padding: 0.2rem;
+  :hover {
+    text-decoration: none;
+    border: 1px solid hotpink;
+  }
 `;
