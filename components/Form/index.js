@@ -34,7 +34,11 @@ export default function Form() {
       items: items,
       id: uuidv4(),
       workingTime: "0",
-      creationDate: new Date(),
+      creationDate: new Date().toLocaleDateString("de-DE", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      }),
     };
 
     const resetItems = partList2.map((item) => {

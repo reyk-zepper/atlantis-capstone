@@ -25,10 +25,10 @@ export default function ProductCard({ project, editState }) {
     router.push("/active");
     moveToActive(id);
   };
-
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
+      <p>created: {project.creationDate}</p>
       <Bar
         data={createChartData(project)}
         options={chartOptions(false, labelColor)}
@@ -63,6 +63,7 @@ const StyledProjectCard = styled.div`
   align-items: center;
   justify-content: center;
   border: 1px solid rgb(var(--foreground-rgb));
+
   gap: 10px;
   border-radius: 10px;
   padding: 10px;
