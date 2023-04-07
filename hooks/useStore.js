@@ -30,6 +30,22 @@ const config = (set) => {
       });
     },
 
+    updateTimer: (editProject) => {
+      set((draft) => {
+        const draftProjectArr = draft.projects.map((project) => {
+          if (project.id === editProject.id) {
+            return {
+              ...editProject,
+              workingTime: Number(editProject.workingTime) + 1,
+            };
+          } else {
+            return project;
+          }
+        });
+        draft.projects = draftProjectArr;
+      });
+    },
+
     //done projects methods
     moveToDone: (id) => {
       set((draft) => {

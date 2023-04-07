@@ -9,6 +9,7 @@ import { chartOptions } from "../../helper/chartOptions";
 import { createChartData } from "../../helper/createChartData";
 import useDarkMode from "@/hooks/useDarkMode";
 import { sumTotalPrice } from "../../helper/sumTotalPrice";
+import formatTime from "@/helper/formatTime";
 
 export default function ProductCard({ project, editState }) {
   const isDarkMode = useDarkMode();
@@ -45,6 +46,7 @@ export default function ProductCard({ project, editState }) {
         })}
       </ul>
       <p>Total: {formatToEUR(sumTotalPrice(project))}</p>
+      <p>Working Time: {formatTime(project.workingTime)}</p>
       {editState === "active" && <Link href={`/edit/${project.id}`}>edit</Link>}
       {editState === "done" && (
         <button type="button" onClick={() => handleMoveToActive(project.id)}>

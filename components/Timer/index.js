@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import useStore from "@/hooks/useStore";
+import formatTime from "@/helper/formatTime";
 
-export default function Timer() {
+export default function Timer({ project }) {
+  const updateTimer = useStore((state) => state.updateTimer);
   const [isRunning, setIsRunning] = useState(false);
-  const [seconds, setSeconds] = useState(0);
 
   const startTimer = () => {
     setIsRunning(true);
@@ -15,32 +17,19 @@ export default function Timer() {
     let intervalID;
     if (isRunning) {
       intervalID = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds + 1);
+        updateTimer(project);
       }, 1000);
       return () => clearInterval(intervalID);
     }
-  }, [isRunning, seconds]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isRunning, project.workingTime]);
 
   return (
     <>
-      <p>{formatTime(seconds)}</p>
+      <p>{formatTime(project.workingTime)}</p>
       <button onClick={isRunning ? stopTimer : startTimer} type="button">
         {isRunning ? "STOP" : "START"}
       </button>
     </>
   );
-}
-
-function formatTime(timeInSeconds) {
-  const hours = Math.floor(timeInSeconds / 3600)
-    .toString()
-    .padStart(2, "0");
-  const minutes = Math.floor((timeInSeconds % 3600) / 60)
-    .toString()
-    .padStart(2, "0");
-  const seconds = Math.floor(timeInSeconds % 60)
-    .toString()
-    .padStart(2, "0");
-
-  return `${hours}:${minutes}:${seconds}`;
 }

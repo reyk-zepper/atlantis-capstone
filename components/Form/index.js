@@ -33,6 +33,8 @@ export default function Form() {
       name: event.target.projectname.value,
       items: items,
       id: uuidv4(),
+      workingTime: "0",
+      creationDate: new Date(),
     };
 
     const resetItems = partList2.map((item) => {
