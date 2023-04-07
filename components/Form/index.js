@@ -93,6 +93,7 @@ export default function Form() {
 
               <input
                 required
+                step={0.01}
                 type="number"
                 min={0}
                 max={10000}

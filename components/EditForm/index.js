@@ -130,6 +130,7 @@ export default function EditForm({ project }) {
 
               <input
                 required
+                step={0.01}
                 type="number"
                 min={0}
                 max={10000}
@@ -172,6 +173,7 @@ export default function EditForm({ project }) {
 
               <input
                 required
+                step={0.01}
                 type="number"
                 min={0}
                 max={10000}
