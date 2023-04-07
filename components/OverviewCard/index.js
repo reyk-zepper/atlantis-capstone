@@ -5,13 +5,13 @@ import "chart.js/auto";
 import { Pie } from "react-chartjs-2";
 import { chartOptions } from "@/helper/chartOptions";
 import { createChartData } from "@/helper/createChartData";
-import useMedia from "@/hooks/useMedia";
+import useDarkMode from "@/hooks/useDarkMode";
 import { sumTotalPrice } from "@/helper/sumTotalPrice";
 
 export default function OverviewCard({ project }) {
-  const labelColor = useMedia(["(prefers-color-scheme: dark)"], [true], false)
-    ? "white"
-    : "black";
+  const isDarkMode = useDarkMode();
+
+  const labelColor = isDarkMode ? "white" : "black";
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>

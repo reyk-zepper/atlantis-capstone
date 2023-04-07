@@ -7,17 +7,16 @@ import "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 import { chartOptions } from "../../helper/chartOptions";
 import { createChartData } from "../../helper/createChartData";
-import useMedia from "../../hooks/useMedia";
+import useDarkMode from "@/hooks/useDarkMode";
 import { sumTotalPrice } from "../../helper/sumTotalPrice";
 
 export default function ProductCard({ project, editState }) {
+  const isDarkMode = useDarkMode();
   const router = useRouter();
   const [moveToActive] = useStore((state) => [state.moveToActive]);
-  const labelColor = useMedia(["(prefers-color-scheme: dark)"], [true], false)
-    ? "white"
-    : "black";
+  const labelColor = isDarkMode ? "white" : "black";
 
-  if (project === undefined) {
+  if (!project) {
     return <h2>something went wrong</h2>;
   }
 
