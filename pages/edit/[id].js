@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import useStore from "@/hooks/useStore";
 import EditForm from "@/components/EditForm";
 import { useEffect, useState } from "react";
+import Timer from "@/components/Timer";
 
 export default function EditPage() {
   const router = useRouter();
@@ -28,6 +29,11 @@ export default function EditPage() {
   if (project === " " || project === undefined) {
     return <h2>loading...</h2>;
   } else {
-    return <EditForm project={project} />;
+    return (
+      <>
+        <Timer />
+        <EditForm project={project} />
+      </>
+    );
   }
 }
