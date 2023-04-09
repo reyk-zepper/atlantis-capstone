@@ -60,6 +60,14 @@ const globalStyles = css`
     gap: 1rem;
   }
 
+  ul {
+    list-style: none;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
   footer {
     width: 100%;
     padding: 0.5rem;
