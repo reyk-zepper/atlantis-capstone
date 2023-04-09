@@ -101,7 +101,7 @@ const StyledProjectCard = styled.div`
   align-items: center;
   justify-content: center;
   border: 1px solid rgb(var(--foreground-rgb));
-
+  box-shadow: 0px 5px 10px 0px rgba(255, 214, 243, 0.7);
   gap: 10px;
   border-radius: 10px;
   padding: 10px;
