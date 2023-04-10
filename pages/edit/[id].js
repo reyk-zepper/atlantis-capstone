@@ -28,6 +28,10 @@ export default function EditPage() {
   if (project === " " || project === undefined) {
     return <h2>loading...</h2>;
   } else {
-    return <EditForm project={project} />;
+    return (
+      <>
+        <EditForm project={project} />
+      </>
+    );
   }
 }

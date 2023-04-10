@@ -3,6 +3,7 @@ import { useImmer } from "use-immer";
 import useStore from "../../hooks/useStore";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
+import Timer from "../Timer";
 
 export default function EditForm({ project }) {
   const router = useRouter();
@@ -20,9 +21,9 @@ export default function EditForm({ project }) {
     event.preventDefault();
 
     const editedProject = {
+      ...project,
       name: event.target.projectname.value,
       items: [...items, ...additionalItems],
-      id: project.id,
     };
     editProject(editedProject);
 
@@ -98,11 +99,12 @@ export default function EditForm({ project }) {
   };
 
   if (project === undefined) {
-    return <h2> there is no prject with this id: {id}</h2>;
+    return <h2> there is no project with this id: {id}</h2>;
   }
 
   return (
     <div>
+      <Timer project={project} />
       <form onSubmit={handleSubmit}>
         <input
           required
@@ -130,6 +132,7 @@ export default function EditForm({ project }) {
 
               <input
                 required
+                step={0.01}
                 type="number"
                 min={0}
                 max={10000}
@@ -172,6 +175,7 @@ export default function EditForm({ project }) {
 
               <input
                 required
+                step={0.01}
                 type="number"
                 min={0}
                 max={10000}
