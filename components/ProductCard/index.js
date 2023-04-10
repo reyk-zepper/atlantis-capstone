@@ -3,16 +3,20 @@ import styled from "styled-components";
 import { formatToEUR } from "../../helper/formatToEUR";
 import { useRouter } from "next/router";
 import useStore from "../../hooks/useStore";
+import "chart.js/auto";
+import { Bar } from "react-chartjs-2";
+import { chartOptions } from "../../helper/chartOptions";
+import { createChartData } from "../../helper/createChartData";
+import useDarkMode from "@/hooks/useDarkMode";
+import { sumTotalPrice } from "../../helper/sumTotalPrice";
 
 export default function ProductCard({ project, editState }) {
+  const isDarkMode = useDarkMode();
   const router = useRouter();
   const [moveToActive] = useStore((state) => [state.moveToActive]);
-  const sumUpArray = (accumulator, currentValue) => accumulator + currentValue;
-  const totalPrice = project?.items
-    .map((item) => Number(item.price))
-    .reduce(sumUpArray, 0);
+  const labelColor = isDarkMode ? "white" : "black";
 
-  if (project === undefined) {
+  if (!project) {
     return <h2>something went wrong</h2>;
   }
 
@@ -24,6 +28,10 @@ export default function ProductCard({ project, editState }) {
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
+      <Bar
+        data={createChartData(project)}
+        options={chartOptions(false, labelColor)}
+      />
       <ul>
         {project.items.map((item) => {
           return (
@@ -36,7 +44,7 @@ export default function ProductCard({ project, editState }) {
           );
         })}
       </ul>
-      <p>Total: {formatToEUR(totalPrice)}</p>
+      <p>Total: {formatToEUR(sumTotalPrice(project))}</p>
       {editState === "active" && <Link href={`/edit/${project.id}`}>edit</Link>}
       {editState === "done" && (
         <button type="button" onClick={() => handleMoveToActive(project.id)}>

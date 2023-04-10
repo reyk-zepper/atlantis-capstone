@@ -1,17 +1,28 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { formatToEUR } from "@/helper/formatToEUR";
+import "chart.js/auto";
+import { Pie } from "react-chartjs-2";
+import { chartOptions } from "@/helper/chartOptions";
+import { createChartData } from "@/helper/createChartData";
+import useDarkMode from "@/hooks/useDarkMode";
+import { sumTotalPrice } from "@/helper/sumTotalPrice";
 
 export default function OverviewCard({ project }) {
-  const sumUpArray = (accumulator, currentValue) => accumulator + currentValue;
-  const totalPrice = project.items
-    .map((item) => Number(item.price))
-    .reduce(sumUpArray, 0);
+  const isDarkMode = useDarkMode();
 
+  const labelColor = isDarkMode ? "white" : "black";
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
-      <p>Total: {formatToEUR(totalPrice)}</p>
+      <div>
+        <Pie
+          data={createChartData(project)}
+          options={chartOptions(true, labelColor)}
+        />
+      </div>
+
+      <p>Total: {formatToEUR(sumTotalPrice(project))}</p>
       <Link href={`/details/${project.id}`}>details</Link>
     </StyledProjectCard>
   );
