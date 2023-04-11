@@ -34,6 +34,7 @@ const StyledProjectCard = styled.div`
   align-items: center;
   justify-content: center;
   border: 1px solid rgb(var(--foreground-rgb));
+  box-shadow: 0px 5px 10px 5px rgba(255, 214, 243, 0.7);
   border-radius: 10px;
   padding: 10px;
   margin: 10px;

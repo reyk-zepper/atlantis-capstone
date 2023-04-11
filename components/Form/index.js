@@ -8,11 +8,15 @@ import { useRouter } from "next/router";
 export default function Form() {
   const router = useRouter();
   const [items, setItems] = useImmer(partList2);
+  const [additionalItems, setAdditionalItems] = useImmer([]);
   const [addProject] = useStore((state) => [state.addProject]);
   const [projectName, setProjectName] = useImmer("");
 
   const handleAddItem = () => {
-    setItems([...items, { value: "", name: "", price: "", id: uuidv4() }]);
+    setAdditionalItems([
+      ...additionalItems,
+      { value: "", name: "", price: "", id: uuidv4() },
+    ]);
   };
 
   const handleItemChange = (index, field, value) => {
@@ -108,6 +112,49 @@ export default function Form() {
                 placeholder={0}
                 onChange={(event) =>
                   handleItemChange(index, "price", event.target.value)
+                }
+              />
+            </div>
+          );
+        })}
+        {additionalItems.map((item, index) => {
+          return (
+            <div key={item.id}>
+              <input
+                required
+                maxLength={60}
+                name={item.name}
+                type="text"
+                placeholder={"Label"}
+                value={item.name}
+                onChange={(event) =>
+                  handleAdditionalItemChange(index, "name", event.target.value)
+                }
+              />
+
+              <input
+                required
+                maxLength={60}
+                name={item.name}
+                type="text"
+                placeholder={"Additional"}
+                value={item.value}
+                onChange={(event) =>
+                  handleAdditionalItemChange(index, "value", event.target.value)
+                }
+              />
+
+              <input
+                required
+                step={0.01}
+                type="number"
+                min={0}
+                max={10000}
+                name={`${item.name}price`}
+                value={item.price}
+                placeholder={0}
+                onChange={(event) =>
+                  handleAdditionalItemChange(index, "price", event.target.value)
                 }
               />
             </div>
