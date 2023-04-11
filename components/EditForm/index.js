@@ -10,7 +10,7 @@ export default function EditForm({ project }) {
   const { id } = router.query;
   const [projectName, setProjectName] = useImmer(project.name);
   const [items, setItems] = useImmer(project.items);
-  const [additionalItems, setAdditionalItems] = useImmer([]);
+  const [additionalItems, setAdditionalItems] = useImmer(project.optionalItems);
   const [editProject, deleteProject, moveToDone] = useStore((state) => [
     state.editProject,
     state.deleteProject,
@@ -23,7 +23,8 @@ export default function EditForm({ project }) {
     const editedProject = {
       ...project,
       name: event.target.projectname.value,
-      items: [...items, ...additionalItems],
+      items: items,
+      optionalItems: additionalItems,
     };
     editProject(editedProject);
 
@@ -56,6 +57,13 @@ export default function EditForm({ project }) {
       ...additionalItems,
       { value: "", name: "", price: "", id: uuidv4() },
     ]);
+  };
+
+  //delete new item
+  const handleDeletItem = (inputID) => {
+    setAdditionalItems(
+      additionalItems.filter((element) => element.id !== inputID)
+    );
   };
 
   // values change
@@ -186,6 +194,9 @@ export default function EditForm({ project }) {
                   handleAdditionalItemChange(index, "price", event.target.value)
                 }
               />
+              <button type="button" onClick={() => handleDeletItem(item.id)}>
+                delete
+              </button>
             </div>
           );
         })}

@@ -19,8 +19,20 @@ export default function Form() {
     ]);
   };
 
+  const handleDeletItem = (inputID) => {
+    setAdditionalItems(
+      additionalItems.filter((element) => element.id !== inputID)
+    );
+  };
+
   const handleItemChange = (index, field, value) => {
     setItems((draft) => {
+      draft[index][field] = value;
+    });
+  };
+
+  const handleAdditionalItemChange = (index, field, value) => {
+    setAdditionalItems((draft) => {
       draft[index][field] = value;
     });
   };
@@ -36,6 +48,7 @@ export default function Form() {
     const project = {
       name: event.target.projectname.value,
       items: items,
+      optionalItems: additionalItems,
       id: uuidv4(),
       workingTime: "0",
       creationDate: new Date().toLocaleDateString("de-DE", {
@@ -157,6 +170,9 @@ export default function Form() {
                   handleAdditionalItemChange(index, "price", event.target.value)
                 }
               />
+              <button type="button" onClick={() => handleDeletItem(item.id)}>
+                delete
+              </button>
             </div>
           );
         })}

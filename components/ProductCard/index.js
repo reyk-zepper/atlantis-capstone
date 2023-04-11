@@ -48,6 +48,20 @@ export default function ProductCard({ project, editState }) {
           );
         })}
       </ul>
+
+      <ul>
+        {project.optionalItems.map((item) => {
+          return (
+            <li key={item.id}>
+              <p>{item.name.toUpperCase()}</p>
+              <p>
+                {item.value.toUpperCase()}: {formatToEUR(item.price)}
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+
       <p>Total: {formatToEUR(sumTotalPrice(project))}</p>
       <p>Working Time: {formatTime(project.workingTime)}</p>
 
@@ -58,9 +72,6 @@ export default function ProductCard({ project, editState }) {
         <>
           <button type="button" onClick={() => handleMoveToActive(project.id)}>
             move to active
-          </button>
-          <button type="button" onClick={handleGeneratePDF}>
-            to PDF
           </button>
         </>
       )}

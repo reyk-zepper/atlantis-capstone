@@ -12,11 +12,13 @@ const config = (set) => {
         draft.projects.push(newProject);
       });
     },
+
     deleteProject: (id) => {
       set((draft) => {
         draft.projects = draft.projects.filter((project) => project.id !== id);
       });
     },
+
     editProject: (editProject) => {
       set((draft) => {
         const draftProjectArray = draft.projects.map((project) => {
