@@ -103,7 +103,7 @@ export default function EditForm({ project }) {
   }
 
   return (
-    <div>
+    <>
       <Timer project={project} />
       <form onSubmit={handleSubmit}>
         <input
@@ -201,6 +201,6 @@ export default function EditForm({ project }) {
       <button onClick={() => handleDeleteItem(project.id)} type="button">
         delete
       </button>
-    </div>
+    </>
   );
 }

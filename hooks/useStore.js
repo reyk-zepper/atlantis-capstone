@@ -19,20 +19,20 @@ const config = (set) => {
     },
     editProject: (editProject) => {
       set((draft) => {
-        const draftProjectArr = draft.projects.map((project) => {
+        const draftProjectArray = draft.projects.map((project) => {
           if (project.id === editProject.id) {
             return editProject;
           } else {
             return project;
           }
         });
-        draft.projects = draftProjectArr;
+        draft.projects = draftProjectArray;
       });
     },
 
     updateTimer: (editProject) => {
       set((draft) => {
-        const draftProjectArr = draft.projects.map((project) => {
+        const draftProjectArray = draft.projects.map((project) => {
           if (project.id === editProject.id) {
             return {
               ...editProject,
@@ -42,7 +42,7 @@ const config = (set) => {
             return project;
           }
         });
-        draft.projects = draftProjectArr;
+        draft.projects = draftProjectArray;
       });
     },
 
