@@ -3,7 +3,7 @@ import OverviewCard from "../OverviewCard";
 
 export default function ProjectCards({ projects }) {
   return (
-    <div>
+    <StyledProjectCards>
       {projects.length === 0 ? (
         <p>no project added to the page</p>
       ) : (
@@ -11,6 +11,14 @@ export default function ProjectCards({ projects }) {
           return <OverviewCard project={project} key={project.id} />;
         })
       )}
-    </div>
+    </StyledProjectCards>
   );
 }
+const StyledProjectCards = styled.div`
+  max-width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+`;

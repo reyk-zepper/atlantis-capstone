@@ -24,8 +24,6 @@ const globalStyles = css`
 
   html,
   body {
-    max-width: 100vw;
-    overflow-x: hidden;
     font-family: Roboto, Arial;
   }
 
@@ -58,6 +56,14 @@ const globalStyles = css`
     align-items: center;
     justify-content: center;
     gap: 1rem;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
   }
 
   footer {
