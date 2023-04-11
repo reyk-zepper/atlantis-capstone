@@ -29,10 +29,10 @@ const StyledMain = styled.main`
 `;
 const StyledHeading = styled(Heading)`
   color: #fff;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff,
-    0 0 42px rgba(255, 214, 243, 0.6), 0 0 82px rgba(255, 214, 243, 0.6),
-    0 0 92px rgba(255, 214, 243, 0.6), 0 0 102px rgba(255, 214, 243, 0.6),
-    0 0 151px rgba(255, 214, 243, 0.6);
+  text-shadow: 0 0 1px #fff, 0 0 10px #fff, 0 0 11px #fff,
+    0 0 21px rgba(255, 214, 243, 0.6), 0 0 41px rgba(255, 214, 243, 0.6),
+    0 0 46px rgba(255, 214, 243, 0.6), 0 0 51px rgba(255, 214, 243, 0.6),
+    0 0 76px rgba(255, 214, 243, 0.6);
 `;
 
 const StyledHeadingContainer = styled.div`
