@@ -24,8 +24,6 @@ const globalStyles = css`
 
   html,
   body {
-    max-width: 100vw;
-    overflow-x: hidden;
     font-family: Roboto, Arial;
   }
 

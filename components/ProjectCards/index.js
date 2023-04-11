@@ -15,6 +15,7 @@ export default function ProjectCards({ projects }) {
   );
 }
 const StyledProjectCards = styled.div`
+  max-width: 100vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
