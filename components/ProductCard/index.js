@@ -9,6 +9,7 @@ import { chartOptions } from "../../helper/chartOptions";
 import { createChartData } from "../../helper/createChartData";
 import useDarkMode from "@/hooks/useDarkMode";
 import { sumTotalPrice } from "../../helper/sumTotalPrice";
+import formatTime from "@/helper/formatTime";
 
 export default function ProductCard({ project, editState }) {
   const isDarkMode = useDarkMode();
@@ -24,10 +25,10 @@ export default function ProductCard({ project, editState }) {
     router.push("/active");
     moveToActive(id);
   };
-
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
+      <p>created: {project.creationDate}</p>
       <Bar
         data={createChartData(project)}
         options={chartOptions(false, labelColor)}
@@ -45,6 +46,7 @@ export default function ProductCard({ project, editState }) {
         })}
       </ul>
       <p>Total: {formatToEUR(sumTotalPrice(project))}</p>
+      <p>Working Time: {formatTime(project.workingTime)}</p>
       {editState === "active" && <Link href={`/edit/${project.id}`}>edit</Link>}
       {editState === "done" && (
         <button type="button" onClick={() => handleMoveToActive(project.id)}>
@@ -61,6 +63,7 @@ const StyledProjectCard = styled.div`
   align-items: center;
   justify-content: center;
   border: 1px solid rgb(var(--foreground-rgb));
+
   gap: 10px;
   border-radius: 10px;
   padding: 10px;

@@ -33,6 +33,12 @@ export default function Form() {
       name: event.target.projectname.value,
       items: items,
       id: uuidv4(),
+      workingTime: "0",
+      creationDate: new Date().toLocaleDateString("de-DE", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      }),
     };
 
     const resetItems = partList2.map((item) => {
@@ -93,6 +99,7 @@ export default function Form() {
 
               <input
                 required
+                step={0.01}
                 type="number"
                 min={0}
                 max={10000}
