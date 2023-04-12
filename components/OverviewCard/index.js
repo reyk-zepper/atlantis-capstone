@@ -28,7 +28,7 @@ export default function OverviewCard({ project }) {
   );
 }
 
-const StyledProjectCard = styled.div`
+const StyledProjectCard = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;

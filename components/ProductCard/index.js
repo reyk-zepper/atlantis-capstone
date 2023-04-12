@@ -11,8 +11,6 @@ import useDarkMode from "@/hooks/useDarkMode";
 import { sumTotalPrice } from "../../helper/sumTotalPrice";
 import formatTime from "@/helper/formatTime";
 
-import { useEffect, useState } from "react";
-
 export default function ProductCard({ project, editState }) {
   const isDarkMode = useDarkMode();
   const router = useRouter();
@@ -36,7 +34,7 @@ export default function ProductCard({ project, editState }) {
         data={createChartData(project)}
         options={chartOptions(false, labelColor)}
       />
-      <ul>
+      <ul role="list">
         {project.items.map((item) => {
           return (
             <li key={item.id}>
@@ -49,7 +47,7 @@ export default function ProductCard({ project, editState }) {
         })}
       </ul>
 
-      <ul>
+      <ul role="list">
         {project.optionalItems.map((item) => {
           return (
             <li key={item.id}>

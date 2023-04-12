@@ -91,6 +91,7 @@ export default function Form() {
     <>
       <form onSubmit={handleSubmit}>
         <input
+          aria-label="projectname"
           required
           maxLength={25}
           type="text"
@@ -103,6 +104,7 @@ export default function Form() {
           return (
             <div key={item.id}>
               <input
+                aria-label={item.name}
                 required
                 maxLength={60}
                 name={item.name}
@@ -115,6 +117,7 @@ export default function Form() {
               />
 
               <input
+                aria-label={`${item.name}price`}
                 required
                 step={0.01}
                 type="number"
@@ -134,6 +137,7 @@ export default function Form() {
           return (
             <div key={item.id}>
               <input
+                aria-label="additional item label"
                 required
                 maxLength={60}
                 name={item.name}
@@ -146,6 +150,7 @@ export default function Form() {
               />
 
               <input
+                aria-label={item.name}
                 required
                 maxLength={60}
                 name={item.name}
@@ -158,6 +163,7 @@ export default function Form() {
               />
 
               <input
+                aria-label={`${item.name}price`}
                 required
                 step={0.01}
                 type="number"

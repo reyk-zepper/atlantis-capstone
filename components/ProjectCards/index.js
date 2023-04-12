@@ -14,7 +14,7 @@ export default function ProjectCards({ projects }) {
     </StyledProjectCards>
   );
 }
-const StyledProjectCards = styled.div`
+const StyledProjectCards = styled.section`
   max-width: 100vw;
   display: flex;
   flex-wrap: wrap;
