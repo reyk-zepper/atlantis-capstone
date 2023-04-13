@@ -10,6 +10,7 @@ import { createChartData } from "../../helper/createChartData";
 import useDarkMode from "@/hooks/useDarkMode";
 import { sumTotalPrice } from "../../helper/sumTotalPrice";
 import formatTime from "@/helper/formatTime";
+import Image from "next/image";
 
 export default function ProductCard({ project, editState }) {
   const isDarkMode = useDarkMode();
@@ -30,6 +31,14 @@ export default function ProductCard({ project, editState }) {
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
       <p>created: {project.creationDate}</p>
+      {!!project.image && (
+        <Image
+          src={project.image.url}
+          alt={project.image.alt}
+          height={300}
+          width={300}
+        />
+      )}
       <Bar
         data={createChartData(project)}
         options={chartOptions(false, labelColor)}
