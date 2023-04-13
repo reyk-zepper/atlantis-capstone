@@ -1,14 +1,23 @@
 import styled from "styled-components";
 import OverviewCard from "../OverviewCard";
+import { useRouter } from "next/router";
 
 export default function ProjectCards({ projects }) {
+  const router = useRouter();
+
   return (
     <StyledProjectCards>
       {projects.length === 0 ? (
         <p>no project added to the page</p>
       ) : (
         projects?.map((project) => {
-          return <OverviewCard project={project} key={project.id} />;
+          return (
+            <OverviewCard
+              project={project}
+              key={project.id}
+              active={router.pathname === "/done"}
+            />
+          );
         })
       )}
     </StyledProjectCards>

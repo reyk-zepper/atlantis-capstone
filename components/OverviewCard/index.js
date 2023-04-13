@@ -9,14 +9,14 @@ import useDarkMode from "@/hooks/useDarkMode";
 import { sumTotalPrice } from "@/helper/sumTotalPrice";
 import Image from "next/image";
 
-export default function OverviewCard({ project }) {
+export default function OverviewCard({ project, active }) {
   const isDarkMode = useDarkMode();
 
   const labelColor = isDarkMode ? "white" : "black";
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
-      {!!project.image && (
+      {!!project.image && active && (
         <Image
           src={project.image.url}
           alt={project.image.alt}

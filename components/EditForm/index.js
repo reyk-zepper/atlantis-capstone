@@ -124,6 +124,15 @@ export default function EditForm({ project }) {
       image: newImage,
     };
     editProject(editProjectWithPhoto);
+    Swal.fire({
+      icon: "success",
+      title: "uploaded!",
+      showConfirmButton: false,
+      timer: 1500,
+      position: "top",
+      toast: true,
+    });
+    event.target.reset();
   }
 
   if (project === undefined) {
