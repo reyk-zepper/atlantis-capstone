@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useStore from "@/hooks/useStore";
 import formatTime from "@/helper/formatTime";
+import StyledButton from "../StyledButton";
 
 export default function Timer({ project }) {
   const updateTimer = useStore((state) => state.updateTimer);
@@ -27,9 +28,13 @@ export default function Timer({ project }) {
   return (
     <>
       <p>{formatTime(project.workingTime)}</p>
-      <button onClick={isRunning ? stopTimer : startTimer} type="button">
+      <StyledButton
+        variant="start"
+        onClick={isRunning ? stopTimer : startTimer}
+        type="button"
+      >
         {isRunning ? "STOP" : "START"}
-      </button>
+      </StyledButton>
     </>
   );
 }

@@ -20,7 +20,6 @@ const AppContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem;
-  border: solid gold;
 `;
 
 const StyledMain = styled.main`
@@ -31,7 +30,6 @@ const StyledMain = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: solid red;
 `;
 
 const StyledHeading = styled.h1`

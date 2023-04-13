@@ -17,11 +17,11 @@ export default function OverviewCard({ project, active }) {
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
       {!!project.image && active && (
-        <Image
+        <StyledImage
           src={project.image.url}
           alt={project.image.alt}
-          height={300}
-          width={300}
+          height={200}
+          width={200}
         />
       )}
       <Pie
@@ -30,7 +30,9 @@ export default function OverviewCard({ project, active }) {
       />
 
       <p>Total: {formatToEUR(sumTotalPrice(project))}</p>
-      <Link href={`/details/${project.id}`}>details</Link>
+      <StyledDetailsLink href={`/details/${project.id}`}>
+        details
+      </StyledDetailsLink>
     </StyledProjectCard>
   );
 }
@@ -45,4 +47,18 @@ const StyledProjectCard = styled.article`
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
+`;
+
+const StyledDetailsLink = styled(Link)`
+  border: 1px solid rgb(var(--foreground-rgb));
+  border-radius: 0.5rem;
+  padding: 0.2rem;
+  margin-top: 1rem;
+  :hover {
+    text-decoration: none;
+    border: 1px solid hotpink;
+  }
+`;
+const StyledImage = styled(Image)`
+  object-fit: cover;
 `;

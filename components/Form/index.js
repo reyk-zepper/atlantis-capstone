@@ -178,9 +178,13 @@ export default function Form() {
                   handleAdditionalItemChange(index, "price", event.target.value)
                 }
               />
-              <button type="button" onClick={() => handleDeletItem(item.id)}>
+              <StyledButton
+                type="button"
+                onClick={() => handleDeletItem(item.id)}
+                variant="delete"
+              >
                 delete
-              </button>
+              </StyledButton>
             </StyledDefaultItems>
           );
         })}
@@ -201,7 +205,7 @@ const StyledForm = styled.form`
   width: 100%;
   height: 100%;
   flex: 1;
-  border: solid blue;
+
   display: flex;
   flex-direction: column;
   align-items: center;

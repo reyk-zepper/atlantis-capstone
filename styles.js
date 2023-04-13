@@ -46,6 +46,10 @@ const globalStyles = css`
     list-style: none;
   }
 
+  li {
+    margin-top: 1rem;
+  }
+
   @media (prefers-color-scheme: dark) {
     html {
       color-scheme: dark;

@@ -11,6 +11,7 @@ import useDarkMode from "@/hooks/useDarkMode";
 import { sumTotalPrice } from "../../helper/sumTotalPrice";
 import formatTime from "@/helper/formatTime";
 import Image from "next/image";
+import StyledButton from "../StyledButton";
 
 export default function ProductCard({ project, editState }) {
   const isDarkMode = useDarkMode();
@@ -32,11 +33,11 @@ export default function ProductCard({ project, editState }) {
       <h2>Project: {project.name}</h2>
       <p>created: {project.creationDate}</p>
       {!!project.image && (
-        <Image
+        <StyledImage
           src={project.image.url}
           alt={project.image.alt}
-          height={300}
-          width={300}
+          height={200}
+          width={200}
         />
       )}
       <Bar
@@ -77,9 +78,13 @@ export default function ProductCard({ project, editState }) {
       )}
       {editState === "done" && (
         <>
-          <button type="button" onClick={() => handleMoveToActive(project.id)}>
+          <StyledButton
+            type="button"
+            onClick={() => handleMoveToActive(project.id)}
+            variant="move"
+          >
             move to active
-          </button>
+          </StyledButton>
         </>
       )}
     </StyledProjectCard>
@@ -107,4 +112,7 @@ const StyledEditLink = styled(Link)`
     text-decoration: none;
     border: 1px solid hotpink;
   }
+`;
+const StyledImage = styled(Image)`
+  object-fit: cover;
 `;
