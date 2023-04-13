@@ -104,6 +104,28 @@ export default function EditForm({ project }) {
     moveToDone(id);
   };
 
+  async function handlePhotoUpload(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+    const data = await response.json();
+    const newImage = {
+      id: data.public_id,
+      url: data.secure_url,
+      width: data.width,
+      height: data.height,
+      alt: `${projectName} image`,
+    };
+    const editProjectWithPhoto = {
+      ...project,
+      image: newImage,
+    };
+    editProject(editProjectWithPhoto);
+  }
+
   if (project === undefined) {
     return <h2> there is no project with this id: {id}</h2>;
   }
@@ -111,6 +133,10 @@ export default function EditForm({ project }) {
   return (
     <>
       <Timer project={project} />
+      <form onSubmit={handlePhotoUpload}>
+        <input aria-label="photo upload" type="file" name="imageFile" />
+        <button type="submit">upload</button>
+      </form>
       <form onSubmit={handleSubmit}>
         <input
           aria-label="project name"

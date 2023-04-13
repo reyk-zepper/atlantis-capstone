@@ -7,6 +7,7 @@ import { chartOptions } from "@/helper/chartOptions";
 import { createChartData } from "@/helper/createChartData";
 import useDarkMode from "@/hooks/useDarkMode";
 import { sumTotalPrice } from "@/helper/sumTotalPrice";
+import Image from "next/image";
 
 export default function OverviewCard({ project }) {
   const isDarkMode = useDarkMode();
@@ -15,12 +16,18 @@ export default function OverviewCard({ project }) {
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
-      <div>
-        <Pie
-          data={createChartData(project)}
-          options={chartOptions(true, labelColor)}
+      {!!project.image && (
+        <Image
+          src={project.image.url}
+          alt={project.image.alt}
+          height={300}
+          width={300}
         />
-      </div>
+      )}
+      <Pie
+        data={createChartData(project)}
+        options={chartOptions(true, labelColor)}
+      />
 
       <p>Total: {formatToEUR(sumTotalPrice(project))}</p>
       <Link href={`/details/${project.id}`}>details</Link>
