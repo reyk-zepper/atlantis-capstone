@@ -1,13 +1,16 @@
 import { v4 as uuidv4 } from "uuid";
 import { useImmer } from "use-immer";
-import { partList2 } from "../../lib/initialValues";
+import { partList } from "../../lib/initialValues";
 import useStore from "../../hooks/useStore";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
+import styled from "styled-components";
+import { StyledSubmitButton } from "../Buttons/SubmitButton";
+import { StyledAddButton } from "../Buttons/AddButton";
 
 export default function Form() {
   const router = useRouter();
-  const [items, setItems] = useImmer(partList2);
+  const [items, setItems] = useImmer(partList);
   const [additionalItems, setAdditionalItems] = useImmer([]);
   const [addProject] = useStore((state) => [state.addProject]);
   const [projectName, setProjectName] = useImmer("");
@@ -58,7 +61,7 @@ export default function Form() {
       }),
     };
 
-    const resetItems = partList2.map((item) => {
+    const resetItems = partList.map((item) => {
       return { ...item, price: "", value: "" };
     });
 
@@ -89,8 +92,8 @@ export default function Form() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
+      <StyledForm onSubmit={handleSubmit}>
+        <StyledInput
           aria-label="projectname"
           required
           maxLength={25}
@@ -102,8 +105,8 @@ export default function Form() {
         />
         {items.map((item, index) => {
           return (
-            <div key={item.id}>
-              <input
+            <StyledDefaultItems key={item.id}>
+              <StyledInput
                 aria-label={item.name}
                 required
                 maxLength={60}
@@ -116,7 +119,7 @@ export default function Form() {
                 }
               />
 
-              <input
+              <StyledInput
                 aria-label={`${item.name}price`}
                 required
                 step={0.01}
@@ -130,13 +133,13 @@ export default function Form() {
                   handleItemChange(index, "price", event.target.value)
                 }
               />
-            </div>
+            </StyledDefaultItems>
           );
         })}
         {additionalItems.map((item, index) => {
           return (
-            <div key={item.id}>
-              <input
+            <StyledDefaultItems key={item.id}>
+              <StyledInput
                 aria-label="additional item label"
                 required
                 maxLength={60}
@@ -149,7 +152,7 @@ export default function Form() {
                 }
               />
 
-              <input
+              <StyledInput
                 aria-label={item.name}
                 required
                 maxLength={60}
@@ -162,7 +165,7 @@ export default function Form() {
                 }
               />
 
-              <input
+              <StyledInput
                 aria-label={`${item.name}price`}
                 required
                 step={0.01}
@@ -179,15 +182,47 @@ export default function Form() {
               <button type="button" onClick={() => handleDeletItem(item.id)}>
                 delete
               </button>
-            </div>
+            </StyledDefaultItems>
           );
         })}
-
-        <button type="button" onClick={handleAddItem}>
-          ✚
-        </button>
-        <button type="submit">save</button>
-      </form>
+        <StyledButtonContainer>
+          <StyledAddButton type="button" onClick={handleAddItem}>
+            &#43;
+          </StyledAddButton>
+          <StyledSubmitButton type="submit">save</StyledSubmitButton>
+        </StyledButtonContainer>
+      </StyledForm>
     </>
   );
 }
+
+const StyledForm = styled.form`
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  border: solid blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+`;
+
+const StyledDefaultItems = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+`;
+const StyledInput = styled.input`
+  height: 3rem;
+  width: 100%;
+`;
+const StyledButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;

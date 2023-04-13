@@ -4,14 +4,14 @@ import Link from "next/link";
 export default function Home() {
   return (
     <StyledStartingContainer>
-      <StyledParagraph>start a new project</StyledParagraph>
+      <StyledParagraph>start a</StyledParagraph>
       <StyledLink href={"/add-project"}>&oplus;</StyledLink>
+      <StyledParagraph>new project</StyledParagraph>
     </StyledStartingContainer>
   );
 }
 
 const StyledStartingContainer = styled.div`
-  border: solid black;
   display: flex;
   flex-direction: column;
   align-items: center;

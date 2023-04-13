@@ -28,15 +28,8 @@ const globalStyles = css`
   }
 
   body {
-    height: 100vh;
     color: rgb(var(--foreground-rgb));
     background: rgb(var(--background-rgb));
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
   }
 
   a {
@@ -49,40 +42,8 @@ const globalStyles = css`
     text-decoration: underline;
   }
 
-  header {
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-
   ul {
     list-style: none;
-  }
-
-  li {
-    margin-bottom: 0.5rem;
-  }
-
-  footer {
-    width: 100%;
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  footer div {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 1rem;
   }
 
   @media (prefers-color-scheme: dark) {
