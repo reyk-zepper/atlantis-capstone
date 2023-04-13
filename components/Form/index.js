@@ -5,8 +5,7 @@ import useStore from "../../hooks/useStore";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { StyledSubmitButton } from "../Buttons/SubmitButton";
-import { StyledAddButton } from "../Buttons/AddButton";
+import StyledButton from "../StyledButton";
 
 export default function Form() {
   const router = useRouter();
@@ -186,10 +185,12 @@ export default function Form() {
           );
         })}
         <StyledButtonContainer>
-          <StyledAddButton type="button" onClick={handleAddItem}>
+          <StyledButton type="button" onClick={handleAddItem} variant="plus">
             &#43;
-          </StyledAddButton>
-          <StyledSubmitButton type="submit">save</StyledSubmitButton>
+          </StyledButton>
+          <StyledButton type="submit" variant="submit">
+            save
+          </StyledButton>
         </StyledButtonContainer>
       </StyledForm>
     </>

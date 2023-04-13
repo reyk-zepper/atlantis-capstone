@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import { StyledBackButton } from "../Buttons/BackButton";
+import StyledButton from "../StyledButton";
 
 export default function Navigation() {
   const router = useRouter();
@@ -10,9 +10,13 @@ export default function Navigation() {
   if (id !== undefined || router.pathname === "/add-project") {
     return (
       <StyledNavigation>
-        <StyledBackButton type="button" onClick={() => router.back()}>
+        <StyledButton
+          type="button"
+          onClick={() => router.back()}
+          variant="back"
+        >
           &larr; back
-        </StyledBackButton>
+        </StyledButton>
       </StyledNavigation>
     );
   }
