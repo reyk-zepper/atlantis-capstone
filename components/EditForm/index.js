@@ -10,7 +10,7 @@ export default function EditForm({ project }) {
   const { id } = router.query;
   const [projectName, setProjectName] = useImmer(project.name);
   const [items, setItems] = useImmer(project.items);
-  const [additionalItems, setAdditionalItems] = useImmer([]);
+  const [additionalItems, setAdditionalItems] = useImmer(project.optionalItems);
   const [editProject, deleteProject, moveToDone] = useStore((state) => [
     state.editProject,
     state.deleteProject,
@@ -23,7 +23,8 @@ export default function EditForm({ project }) {
     const editedProject = {
       ...project,
       name: event.target.projectname.value,
-      items: [...items, ...additionalItems],
+      items: items,
+      optionalItems: additionalItems,
     };
     editProject(editedProject);
 
@@ -50,7 +51,7 @@ export default function EditForm({ project }) {
       }
     });
   }
-  //add a new item
+
   const handleAddItem = () => {
     setAdditionalItems([
       ...additionalItems,
@@ -58,7 +59,12 @@ export default function EditForm({ project }) {
     ]);
   };
 
-  // values change
+  const handleDeletItem = (inputID) => {
+    setAdditionalItems(
+      additionalItems.filter((element) => element.id !== inputID)
+    );
+  };
+
   const handleItemChange = (index, field, value) => {
     setItems((draft) => {
       draft[index][field] = value;
@@ -107,6 +113,7 @@ export default function EditForm({ project }) {
       <Timer project={project} />
       <form onSubmit={handleSubmit}>
         <input
+          aria-label="project name"
           required
           maxLength={25}
           type="text"
@@ -119,6 +126,7 @@ export default function EditForm({ project }) {
           return (
             <div key={item.id}>
               <input
+                aria-label={item.name}
                 required
                 maxLength={60}
                 name={item.name}
@@ -131,6 +139,7 @@ export default function EditForm({ project }) {
               />
 
               <input
+                aria-label={`${item.name}price`}
                 required
                 step={0.01}
                 type="number"
@@ -150,6 +159,7 @@ export default function EditForm({ project }) {
           return (
             <div key={item.id}>
               <input
+                aria-label="additional input name"
                 required
                 maxLength={60}
                 name={item.name}
@@ -162,6 +172,7 @@ export default function EditForm({ project }) {
               />
 
               <input
+                aria-label={item.name}
                 required
                 maxLength={60}
                 name={item.name}
@@ -174,6 +185,7 @@ export default function EditForm({ project }) {
               />
 
               <input
+                aria-label={`${item.name}price`}
                 required
                 step={0.01}
                 type="number"
@@ -186,6 +198,9 @@ export default function EditForm({ project }) {
                   handleAdditionalItemChange(index, "price", event.target.value)
                 }
               />
+              <button type="button" onClick={() => handleDeletItem(item.id)}>
+                delete
+              </button>
             </div>
           );
         })}

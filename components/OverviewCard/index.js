@@ -28,12 +28,13 @@ export default function OverviewCard({ project }) {
   );
 }
 
-const StyledProjectCard = styled.div`
+const StyledProjectCard = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 1px solid rgb(var(--foreground-rgb));
+  box-shadow: 0px 5px 10px 5px rgba(255, 214, 243, 0.7);
   border-radius: 10px;
   padding: 10px;
   margin: 10px;

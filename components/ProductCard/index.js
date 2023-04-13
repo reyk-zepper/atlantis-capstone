@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { formatToEUR } from "../../helper/formatToEUR";
 import { useRouter } from "next/router";
 import useStore from "../../hooks/useStore";
@@ -25,6 +25,7 @@ export default function ProductCard({ project, editState }) {
     router.push("/active");
     moveToActive(id);
   };
+
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
@@ -33,7 +34,7 @@ export default function ProductCard({ project, editState }) {
         data={createChartData(project)}
         options={chartOptions(false, labelColor)}
       />
-      <ul>
+      <ul role="list">
         {project.items.map((item) => {
           return (
             <li key={item.id}>
@@ -45,13 +46,32 @@ export default function ProductCard({ project, editState }) {
           );
         })}
       </ul>
+
+      <ul role="list">
+        {project.optionalItems.map((item) => {
+          return (
+            <li key={item.id}>
+              <p>{item.name.toUpperCase()}</p>
+              <p>
+                {item.value.toUpperCase()}: {formatToEUR(item.price)}
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+
       <p>Total: {formatToEUR(sumTotalPrice(project))}</p>
       <p>Working Time: {formatTime(project.workingTime)}</p>
-      {editState === "active" && <Link href={`/edit/${project.id}`}>edit</Link>}
+
+      {editState === "active" && (
+        <StyledEditLink href={`/edit/${project.id}`}>edit</StyledEditLink>
+      )}
       {editState === "done" && (
-        <button type="button" onClick={() => handleMoveToActive(project.id)}>
-          move to active
-        </button>
+        <>
+          <button type="button" onClick={() => handleMoveToActive(project.id)}>
+            move to active
+          </button>
+        </>
       )}
     </StyledProjectCard>
   );
@@ -63,7 +83,7 @@ const StyledProjectCard = styled.div`
   align-items: center;
   justify-content: center;
   border: 1px solid rgb(var(--foreground-rgb));
-
+  box-shadow: 0px 5px 10px 0px rgba(255, 214, 243, 0.7);
   gap: 10px;
   border-radius: 10px;
   padding: 10px;
