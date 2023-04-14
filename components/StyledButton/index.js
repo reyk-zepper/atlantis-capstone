@@ -30,6 +30,7 @@ const buttonStyles = {
     font-size: 1.25rem;
     color: white;
     background-color: rgb(219, 88, 86);
+
     &:hover {
       transform: scale(0.8);
     }

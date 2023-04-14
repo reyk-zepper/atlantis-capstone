@@ -61,7 +61,7 @@ const StyledLink = styled(Link)`
 
   &:hover {
     text-decoration: underline;
-    color: hotpink;
+    color: rgba(255, 214, 243, 1.2);
   }
 `;
 const StyledHomeLink = styled(StyledLink)`
