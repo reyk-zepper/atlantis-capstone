@@ -2,7 +2,7 @@
 
 ## _Description_
 
-### P[al[ul: The Ultimate PC Building App
+### **P[al[ul: The Ultimate PC Building App**
 
 Are you tired of feeling like a hot mess when it comes to tracking your PC build costs and hours? Have you had enough of those dreary, uninspiring spreadsheets and graphs? Well, fear not, my friend! P[al[ul is here to save the day (and your sanity)!
 
@@ -22,7 +22,7 @@ you can check out the live demo here: [pcalcul.vercel.app](https://pcalcul.verce
 
 ---
 
-## Tech Stack
+## _Tech Stack_
 
 - React
 - React Hooks
@@ -43,7 +43,7 @@ you can check out the live demo here: [pcalcul.vercel.app](https://pcalcul.verce
 
 ---
 
-## Project Setup
+## _Project Setup_
 
 - Clone this repository
 - Install all dependencies with  
