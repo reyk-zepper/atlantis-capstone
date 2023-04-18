@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { useImmer } from "use-immer";
-import { partList2 } from "../../lib/initialValues";
+import { partList } from "../../lib/initialValues";
 import useStore from "../../hooks/useStore";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
@@ -9,7 +9,7 @@ import StyledButton from "../StyledButton";
 
 export default function Form() {
   const router = useRouter();
-  const [items, setItems] = useImmer(partList2);
+  const [items, setItems] = useImmer(partList);
   const [additionalItems, setAdditionalItems] = useImmer([]);
   const [addProject] = useStore((state) => [state.addProject]);
   const [projectName, setProjectName] = useImmer("");
@@ -60,7 +60,7 @@ export default function Form() {
       }),
     };
 
-    const resetItems = partList2.map((item) => {
+    const resetItems = partList.map((item) => {
       return { ...item, price: "", value: "" };
     });
 
