@@ -4,6 +4,8 @@ import useStore from "../../hooks/useStore";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import Timer from "../Timer";
+import StyledButton from "../StyledButton";
+import styled from "styled-components";
 
 export default function EditForm({ project }) {
   const router = useRouter();
@@ -104,15 +106,56 @@ export default function EditForm({ project }) {
     moveToDone(id);
   };
 
+  async function handlePhotoUpload(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+    const data = await response.json();
+    const newImage = {
+      id: data.public_id,
+      url: data.secure_url,
+      width: data.width,
+      height: data.height,
+      alt: `${projectName} image`,
+    };
+    const editProjectWithPhoto = {
+      ...project,
+      image: newImage,
+    };
+    editProject(editProjectWithPhoto);
+    Swal.fire({
+      icon: "success",
+      title: "uploaded!",
+      showConfirmButton: false,
+      timer: 1500,
+      position: "top",
+      toast: true,
+    });
+    event.target.reset();
+  }
+
   if (project === undefined) {
     return <h2> there is no project with this id: {id}</h2>;
   }
 
   return (
-    <>
+    <StyledEditPage>
       <Timer project={project} />
-      <form onSubmit={handleSubmit}>
-        <input
+      <StyledForm onSubmit={handlePhotoUpload}>
+        <StyledUploadInput
+          aria-label="photo upload"
+          type="file"
+          name="imageFile"
+        />
+        <StyledButton variant="submit" type="submit">
+          upload
+        </StyledButton>
+      </StyledForm>
+      <StyledForm onSubmit={handleSubmit}>
+        <StyledInput
           aria-label="project name"
           required
           maxLength={25}
@@ -124,8 +167,8 @@ export default function EditForm({ project }) {
         />
         {items.map((item, index) => {
           return (
-            <div key={item.id}>
-              <input
+            <StyledDefaultItems key={item.id}>
+              <StyledInput
                 aria-label={item.name}
                 required
                 maxLength={60}
@@ -138,7 +181,7 @@ export default function EditForm({ project }) {
                 }
               />
 
-              <input
+              <StyledInput
                 aria-label={`${item.name}price`}
                 required
                 step={0.01}
@@ -152,13 +195,13 @@ export default function EditForm({ project }) {
                   handleItemChange(index, "price", event.target.value)
                 }
               />
-            </div>
+            </StyledDefaultItems>
           );
         })}
         {additionalItems.map((item, index) => {
           return (
-            <div key={item.id}>
-              <input
+            <StyledDefaultItems key={item.id}>
+              <StyledInput
                 aria-label="additional input name"
                 required
                 maxLength={60}
@@ -171,7 +214,7 @@ export default function EditForm({ project }) {
                 }
               />
 
-              <input
+              <StyledInput
                 aria-label={item.name}
                 required
                 maxLength={60}
@@ -184,7 +227,7 @@ export default function EditForm({ project }) {
                 }
               />
 
-              <input
+              <StyledInput
                 aria-label={`${item.name}price`}
                 required
                 step={0.01}
@@ -198,24 +241,86 @@ export default function EditForm({ project }) {
                   handleAdditionalItemChange(index, "price", event.target.value)
                 }
               />
-              <button type="button" onClick={() => handleDeletItem(item.id)}>
+              <StyledButton
+                variant="delete"
+                type="button"
+                onClick={() => handleDeletItem(item.id)}
+              >
                 delete
-              </button>
-            </div>
+              </StyledButton>
+            </StyledDefaultItems>
           );
         })}
-
-        <button type="button" onClick={handleAddItem}>
-          ✚
-        </button>
-        <button type="submit">save</button>
-      </form>
-      <button type="button" onClick={() => handleMoveToDone(project.id)}>
+        <StyledButtonContainer>
+          <StyledButton variant="plus" type="button" onClick={handleAddItem}>
+            &#43;
+          </StyledButton>
+          <StyledButton variant="submit" type="submit">
+            save
+          </StyledButton>
+        </StyledButtonContainer>
+      </StyledForm>
+      <StyledButton
+        variant="move"
+        type="button"
+        onClick={() => handleMoveToDone(project.id)}
+      >
         move to done
-      </button>
-      <button onClick={() => handleDeleteItem(project.id)} type="button">
+      </StyledButton>
+      <StyledButton
+        variant="delete"
+        onClick={() => handleDeleteItem(project.id)}
+        type="button"
+      >
         delete
-      </button>
-    </>
+      </StyledButton>
+    </StyledEditPage>
   );
 }
+
+const StyledForm = styled.form`
+  width: 100%;
+  height: 100%;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+`;
+
+const StyledDefaultItems = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+`;
+const StyledInput = styled.input`
+  height: 3rem;
+  width: 100%;
+`;
+const StyledButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledUploadInput = styled.input`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  justify-self: flex-start;
+`;
+
+const StyledEditPage = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+`;

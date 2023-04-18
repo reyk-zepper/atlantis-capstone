@@ -7,23 +7,32 @@ import { chartOptions } from "@/helper/chartOptions";
 import { createChartData } from "@/helper/createChartData";
 import useDarkMode from "@/hooks/useDarkMode";
 import { sumTotalPrice } from "@/helper/sumTotalPrice";
+import Image from "next/image";
 
-export default function OverviewCard({ project }) {
+export default function OverviewCard({ project, active }) {
   const isDarkMode = useDarkMode();
 
   const labelColor = isDarkMode ? "white" : "black";
   return (
     <StyledProjectCard key={project.id}>
       <h2>Project: {project.name}</h2>
-      <div>
-        <Pie
-          data={createChartData(project)}
-          options={chartOptions(true, labelColor)}
+      {!!project.image && active && (
+        <StyledImage
+          src={project.image.url}
+          alt={project.image.alt}
+          height={200}
+          width={200}
         />
-      </div>
+      )}
+      <Pie
+        data={createChartData(project)}
+        options={chartOptions(true, labelColor)}
+      />
 
       <p>Total: {formatToEUR(sumTotalPrice(project))}</p>
-      <Link href={`/details/${project.id}`}>details</Link>
+      <StyledDetailsLink href={`/details/${project.id}`}>
+        details
+      </StyledDetailsLink>
     </StyledProjectCard>
   );
 }
@@ -38,4 +47,18 @@ const StyledProjectCard = styled.article`
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
+`;
+
+const StyledDetailsLink = styled(Link)`
+  border: 1px solid rgb(var(--foreground-rgb));
+  border-radius: 0.5rem;
+  padding: 0.2rem;
+  margin-top: 1rem;
+  :hover {
+    text-decoration: none;
+    border: 1px solid hotpink;
+  }
+`;
+const StyledImage = styled(Image)`
+  object-fit: cover;
 `;

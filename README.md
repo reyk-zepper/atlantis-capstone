@@ -1,38 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ![pcalculLogo](/public/pcalculLogoSliced.png)
 
-## Getting Started
+## _Description_
 
-First, run the development server:
+### **P[al[ul: The Ultimate PC Building App**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Are you tired of feeling like a hot mess when it comes to tracking your PC build costs and hours? Have you had enough of those dreary, uninspiring spreadsheets and graphs? Well, fear not, my friend! P[al[ul is here to save the day (and your sanity)!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+With P[al[ul, you can finally bid adieu to those tedious spreadsheets and say hello to sleek, stylish project cards that make tracking your costs and hours a breeze. Add your expenses, record your work hours, and even throw in a product pic for some visual pizzazz. And the best part? You'll get to see all your hard work come to life in a mouth-watering pie chart - because who doesn't love a good pie, right?
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+But that's not all, folks! If you're a bona fide number cruncher (and let's be real, who isn't these days?), you can dive into the detailed view and ogle at the magnificent bar chart. It's like being back in algebra class, but way more fun (and less mind-numbing)!
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+So what are you waiting for? Download P[al[ul now and start tracking your PC build costs and hours like a boss. With our app, you'll have everything you need to build the computer of your dreams - except for the actual parts, but hey, we can't work miracles here!
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## _Demo_
 
-## Learn More
+![pccalculMockUp](/public/pcalculMockUp.png)
 
-To learn more about Next.js, take a look at the following resources:
+you can check out the live demo here: [pcalcul.vercel.app](https://pcalcul.vercel.app/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## _Tech Stack_
 
-## Deploy on Vercel
+- React
+- React Hooks
+- React Router
+- React Testing Library / Jest
+- JavaScript
+- Zustand
+- Immer
+- Custom Hooks
+- Chart.js
+- Cloudinary
+- SweetAlert2
+- uuid
+- styled-components
+- localStorage
+- npm
+- Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## _Project Setup_
+
+- Clone this repository
+- Install all dependencies with  
+   `$ npm install`
+- Run app in dev mode with  
+   `$ npm run dev`
+- Server: [http://localhost:3000/](http://localhost:3000/)
+- Run tests via  
+  `$ npm run test`
+- To create a build ready for deploying run  
+  `$ npm run build`

@@ -4,14 +4,14 @@ import Link from "next/link";
 export default function Home() {
   return (
     <StyledStartingContainer>
-      <StyledParagraph>start a new project</StyledParagraph>
+      <StyledParagraph>start a</StyledParagraph>
       <StyledLink href={"/add-project"}>&oplus;</StyledLink>
+      <StyledParagraph>new project</StyledParagraph>
     </StyledStartingContainer>
   );
 }
 
 const StyledStartingContainer = styled.div`
-  border: solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,6 +31,10 @@ const StyledLink = styled(Link)`
   position: relative;
   font-size: 3rem;
   cursor: pointer;
+  text-shadow: 0 0 1px #fff, 0 0 10px #fff, 0 0 11px #fff,
+    0 0 21px rgba(255, 214, 243, 0.6), 0 0 41px rgba(255, 214, 243, 0.6),
+    0 0 46px rgba(255, 214, 243, 0.6), 0 0 51px rgba(255, 214, 243, 0.6),
+    0 0 76px rgba(255, 214, 243, 0.6);
   &:hover {
     color: hotpink;
     text-decoration: none;
